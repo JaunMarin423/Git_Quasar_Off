@@ -10,11 +10,11 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "localforage": "^1.7.3",
     "vue-i18n": "^7.3.3",
     "vuelidate": "^0.7.4",
-    "vuex-persist": "^2.0.0"
+    "vuex-persist": "^2.0.1"
   },
   "devDependencies": {
     "quasar-cli": "^0.17.0",

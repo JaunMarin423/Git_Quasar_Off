@@ -1,11 +1,13 @@
 // import {bd} from '@/mixins/bd.js'
 // let cargando = false
 
+import vue from 'vue'
+
 export const peticiones = {
   data () {
     return {
       query: '',
-      bearer: ''
+      bearer: '',
     }
   },
   mounted () {
@@ -21,7 +23,7 @@ export const peticiones = {
   },
   methods: {
     async axiosModeloGET (url) {
-      let info = await this.axios({
+      let info = await this.$axios({
         method: "GET",
         url: this.$API_Path + url + '?' + this.query,
         headers: {
@@ -44,7 +46,7 @@ export const peticiones = {
       return info
     },
     async axiosModelo (url, metodo, body) {
-      let info = await this.axios({
+      let info = await this.$axios({
         method: metodo,
         url: this.$API_Path + url + '?' + this.query,
         headers: {
@@ -74,7 +76,7 @@ export const peticiones = {
         idsec_users: this.idsec_users,
         origen: "APP"
       }
-      this.axiosModelo("/logout", 'POST', data)
+      this.$axiosModelo("/logout", 'POST', data)
         .then(Data => {
           if (Data.status === 200) {
             this.mensaje_notificacion("primary", "Usuario deslogueado", false);
@@ -119,7 +121,7 @@ export const peticiones = {
         idsec_users: this.form.user,
         origen: "APP"
       }
-      this.axiosModelo("/logoutForce", 'POST', data)
+      this.$axiosModelo("/logoutForce", 'POST', data)
         .then(Data => {
           if (Data.status === 200) {
             this.mensaje_notificacion("primary", "Usuario deslogueado", false)
