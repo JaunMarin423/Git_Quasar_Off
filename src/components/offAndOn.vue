@@ -22,7 +22,8 @@
 </template>
 
 <script>
-import { peticiones } from "../js/peticiones.js"
+import { peticiones } from "../js/peticiones.js";
+import { bd } from "../js/bd";
 import { QSpinnerFacebook, QSpinnerGears } from "quasar";
 export default {
   name: "offAndOnComponen",
@@ -135,6 +136,7 @@ export default {
   },
   methods: {
     getData(value) {
+      if(value.loading==false){
       // we set loading state
       value.loading = true;
       console.log(value.url);
@@ -147,11 +149,19 @@ export default {
           _id: value.id,
           data: this.dataInfo
         }
-        
+        bd.put(res)
+        this.dataInfo.forEach(element => {
+          this.$q.notify({
+          message: 'Data guardada correctamente',
+          position: 'top',
+          type: 'positive'
+          })
+        })          
       })
       setTimeout(() => {
       value.loading = false;
       }, 3000)
+      }
     },
 
     changeMessage() {
