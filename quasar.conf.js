@@ -74,9 +74,14 @@ module.exports = function (ctx) {
         'QCardMain',
         'QCardMedia',
         'QCardSeparator',
+        'QItemSeparator',
+        'QCheckbox',
+        'QToggle',
+        'QSpinnerGears'
       ],
       directives: [
-        'Ripple'
+        'Ripple',
+        'CloseOverlay'
       ],
       // Quasar plugins
       plugins: [
