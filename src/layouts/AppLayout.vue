@@ -19,7 +19,7 @@
 
         <q-toolbar-title>
           Transferencia Valor
-          <div slot="subtitle">Running on Quasar v{{ $q.version }}</div>
+          <div slot="subtitle">Versión actual: {{ $q.version }}</div>
         </q-toolbar-title>
 
         <q-btn
@@ -98,6 +98,12 @@
           name="register"
           slot="title"
           v-if="isOnline"
+        />
+        <q-route-tab
+          icon="sync"
+          to="/offandon"
+          name="offandon"
+          slot="title"
         />
       </q-tabs>
 
