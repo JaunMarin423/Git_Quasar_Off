@@ -1,23 +1,9 @@
 <template>
   <div>
     <q-select
-      stack-label="Seleccione"
-      inverted-light
-      color="blue-5"
-      separator
-      class="class_select"
+      v-model="select"
       :options="options"
-      v-model="options"
-      :disabled="disabled"
-    >
-    <q-select-item 
-    :key="index"
-    :value="item.value"
-    :text="item.text"
-    v-for="(item,index) in this.options"
     />
-    
-    </q-select>
     
   </div>
 </template>
@@ -62,7 +48,8 @@ export default {
       select: 'fb',
       errorerror: true,
       warning: false,
-      options: []
+      options: [],
+      seleccionado: ''
     }
   },
   mounted () {
@@ -70,13 +57,19 @@ export default {
   },
   methods:{
     consultar(){
-      bd.get('receptores')
-        .then(function (doc) {
-          console.log(doc._id)
-          this.options = doc.data
-        }).catch(function (err) {
-          console.log(err);
-        });
+      let opciones = []
+      return bd.get('receptores')
+      .then(doc => {
+        this.options = doc.data.map(e => {
+          return {
+            label: e.valor,
+            value: e.valor
+          }
+        })
+        })
+        
+      console.log('opciones', this.options)
+      
     }
   },
   watch: {

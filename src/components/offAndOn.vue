@@ -17,7 +17,7 @@
         </q-item-side>
       </q-item>
     </div>
-    <q-btn push color="primary" @click="changeMessage">Descargar información</q-btn>
+    <q-btn push color="primary" icon="cloud_download" label="Descargar información" @click="changeMessage"/>
   </div>
 </template>
 
@@ -206,7 +206,6 @@ export default {
         message: "Por favor espere mientras descarga la información"
       });
       setTimeout(() => {
-        console.log("Entra aquí");
       }, 3000);
       this.$q.loading.hide();
     }
