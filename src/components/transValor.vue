@@ -14,6 +14,10 @@
     </q-card-title>
     <span class="letrasazules">Receptor (médico):  </span>
     <selectComponent/>
+    <div class="col-6 mt-2">
+      <q-btn align="between" class="btn-fixed-width espacio" color="primary" label="Buscar" icon="search" @click="datosReceptor()"/>
+    </div>
+     <br/>>
     <FirmaComponent/>
 
 
@@ -24,6 +28,8 @@
 import selectComponent from '../components/select'
 import FirmaComponent from '../components/firma'
 
+const today = new Date()
+
 export default {
  name: 'transValorComponent',
     components: {
@@ -32,6 +38,8 @@ export default {
   },
   data () {
     return {
+      today,
+      text: '',
       mostrar_form: '',
       dataInfo: '',
       campana: '',
