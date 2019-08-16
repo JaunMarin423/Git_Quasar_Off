@@ -23,9 +23,11 @@
     </div>
     <div class="col">
       <span class="letrasazules">Recibe directamente la transferencia de valor:  </span>
-      <q-toggle v-model="visible" label="Recibe Directo" />
+      <br/>
+       <q-radio v-model="form.recibe_directo" val="1" color="green" left-label label="Si" />
+       <q-radio v-model="form.recibe_directo" val="0" color="red" left-label label="No" style="margin-left: 10px" /> 
         <q-slide-transition>
-          <p v-show="visible" style="margin: 0; max-width: 500px">
+          <p v-if="form.recibe_directo === '0'" style="margin: 0; max-width: 500px">
             <img
               class="responsive"
               src="../assets/quasar-logo-full.svg"
@@ -38,7 +40,8 @@
     <q-card-title class="bg-primary text-center fondoAzcul">
       TRANSFERENCIA DE VALOR
     </q-card-title>
-
+    
+    <valorEComponent/>
 
     <q-input v-model="text" float-label="Float label & placeholder" placeholder="Placeholder"/>
 
@@ -53,6 +56,7 @@
 import tipoPersonaComponent from '../components/tipoPersona'
 import selectComponent from '../components/select'
 import FirmaComponent from '../components/firma'
+import valorEComponent from '../components/valorE'
 
 const today = new Date()
 
@@ -61,7 +65,8 @@ export default {
     components: {
     selectComponent,
     FirmaComponent,
-    tipoPersonaComponent
+    tipoPersonaComponent,
+    valorEComponent
   },
   data () {
     return {

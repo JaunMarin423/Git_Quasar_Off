@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span class="letrasazules">Tipo de tercero</span>
+    <span class="letrasazules">Tipo de transferencia:</span>
     <q-select
       v-model="select"
       :options="options"
@@ -15,7 +15,7 @@ import { peticiones } from  "../assets/params/params.js"
 import { bd } from "../js/bd";
 
 export default {
-  name:'tipoPersonaComponent',
+  name:'tipodeTransferenciaComponent',
   model:{
     prop:'Selecccion',
     event:'update'
@@ -60,8 +60,9 @@ export default {
   methods:{
     consultar(){
       let opciones = []
-      return bd.get('terceros')
+      return bd.get('transerencia')
       .then(doc => {
+      console.log(doc)
         this.options = doc.data.map(e => {
           return {
             label: e.text,
