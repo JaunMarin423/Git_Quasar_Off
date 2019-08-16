@@ -30,9 +30,14 @@
               class="responsive"
               src="../assets/quasar-logo-full.svg"
             >
+            <tipoPersonaComponent/>
           </p>
       </q-slide-transition>
     </div>
+
+    <q-card-title class="bg-primary text-center fondoAzcul">
+      TRANSFERENCIA DE VALOR
+    </q-card-title>
 
 
     <q-input v-model="text" float-label="Float label & placeholder" placeholder="Placeholder"/>
@@ -45,6 +50,7 @@
 </template>
 
 <script>
+import tipoPersonaComponent from '../components/tipoPersona'
 import selectComponent from '../components/select'
 import FirmaComponent from '../components/firma'
 
@@ -54,7 +60,8 @@ export default {
  name: 'transValorComponent',
     components: {
     selectComponent,
-    FirmaComponent
+    FirmaComponent,
+    tipoPersonaComponent
   },
   data () {
     return {
