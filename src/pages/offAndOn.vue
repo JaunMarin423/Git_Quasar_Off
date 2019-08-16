@@ -1,8 +1,6 @@
 <template>
   <q-page padding>
     <offAndOnComponen/>
-    <selectComponent/>
-    <FirmaComponent/>
   </q-page>
 </template>
 
@@ -14,8 +12,6 @@ export default {
   name: 'offAndOnPage',
   components: {
     offAndOnComponen,
-    selectComponent,
-    FirmaComponent
   }
 }
 </script>

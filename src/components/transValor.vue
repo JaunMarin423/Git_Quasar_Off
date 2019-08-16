@@ -1,12 +1,35 @@
 <template>
   <div>
+    <q-card-title class="bg-primary text-center fondoAzcul">
+      INFORMACIÓN GENERAL
+    </q-card-title>
+    <q-datetime v-model="today" modal float-label="Fecha" />
     
+    <span class="letrasazules">Usuario creador:  </span> <samp class="letrasUser"> {{userName}} </samp>
+
+    <q-input v-model="text" float-label="Float label & placeholder" placeholder="Placeholder"/>
+
+    <q-card-title class="bg-primary text-center fondoAzcul">
+      INFORMACIÓN DEL RECEPTOR
+    </q-card-title>
+    <span class="letrasazules">Receptor (médico):  </span>
+    <selectComponent/>
+    <FirmaComponent/>
+
+
   </div>
 </template>
 
 <script>
+import selectComponent from '../components/select'
+import FirmaComponent from '../components/firma'
+
 export default {
- name: 'transValor',
+ name: 'transValorComponent',
+    components: {
+    selectComponent,
+    FirmaComponent
+  },
   data () {
     return {
       mostrar_form: '',
@@ -37,4 +60,11 @@ export default {
 </script>
 
 <style>
+.fondoAzcul{
+  background:#058BB2;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  size: 17px;
+}
 </style>

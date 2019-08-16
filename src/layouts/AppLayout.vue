@@ -105,6 +105,12 @@
           name="offandon"
           slot="title"
         />
+        <q-route-tab
+          icon="call_merge"
+          to="/transvalor"
+          name="transvalor"
+          slot="title"
+        />        
       </q-tabs>
 
       <q-tabs v-else>

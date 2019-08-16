@@ -3,6 +3,7 @@
     <q-select
       v-model="select"
       :options="options"
+      label="Medico"
     />
     
   </div>

@@ -7,6 +7,7 @@ const routes = [
       { path: '', component: () => import('@/pages/Index.vue') },
       { path: 'login', component: () => import('@/pages/Login.vue') },
       { path: 'offandon', component: () => import('@/pages/offAndOn.vue') },
+      { path: 'transvalor', component: () => import('@/pages/transValor.vue') },
       { path: 'register', component: () => import('@/pages/Register.vue') },
       { path: 'news', component: () => import('@/pages/News.vue'), meta: { requiresAuth: true} },
       { path: 'news/:id', name: 'news-detail', component: () => import('@/pages/NewsDetail.vue'), meta: { requiresAuth: true} },

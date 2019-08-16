@@ -78,7 +78,8 @@ module.exports = function (ctx) {
         'QCheckbox',
         'QToggle',
         'QSpinnerGears',
-        'QSelect'
+        'QSelect',
+        'QDatetime'
       ],
       directives: [
         'Ripple',
