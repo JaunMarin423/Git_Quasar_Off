@@ -77,7 +77,8 @@ module.exports = function (ctx) {
         'QItemSeparator',
         'QCheckbox',
         'QToggle',
-        'QSpinnerGears'
+        'QSpinnerGears',
+        'QSelect'
       ],
       directives: [
         'Ripple',

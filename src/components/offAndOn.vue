@@ -136,10 +136,17 @@ export default {
   },
   methods: {
     getData(value) {
+      console.log('hola');
+      console.log(doc);
+      
+      if(value.id == doc._id){
+        db.remove(doc._id)
+
       if(value.loading==false){
       // we set loading state
       value.loading = true;
       console.log(value.url);
+
       this.axiosModeloGET(value.url)
       .then((Data) => {
         this.rspValidacion(Data.status)
@@ -161,6 +168,36 @@ export default {
       setTimeout(() => {
       value.loading = false;
       }, 3000)
+      }
+
+      }else{
+         if(value.loading==false){
+      // we set loading state
+      value.loading = true;
+      console.log(value.url);
+
+      this.axiosModeloGET(value.url)
+      .then((Data) => {
+        this.rspValidacion(Data.status)
+        this.dataInfo = Array.isArray(Data.data.data.data) ? Data.data.data.data: []
+        this.dataInfo._id = value.id
+        let res = {
+          _id: value.id,
+          data: this.dataInfo
+        }
+        bd.put(res)
+        this.dataInfo.forEach(element => {
+          this.$q.notify({
+          message: 'Data guardada correctamente',
+          position: 'top',
+          type: 'positive'
+          })
+        })          
+      })
+      setTimeout(() => {
+      value.loading = false;
+      }, 3000)
+      }
       }
     },
 

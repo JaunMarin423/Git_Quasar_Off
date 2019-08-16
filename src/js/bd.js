@@ -5,7 +5,7 @@ import PouchDB from 'pouchdb'
 
 var db = new PouchDB('Controlpharm');
 
-// De por sí ya controla la version, obgetos, auto incrementales por si solo en dado caso leer la documentación
+// De por sí ya controla  a version, obgetos, auto incrementales por si solo en dado caso leer la documentación
 // se puede ver lo que creo por default en Application/IndexedBD/_puch_Controlpharm...
 
 // const routes = require('./routes')
