@@ -79,7 +79,13 @@ module.exports = function (ctx) {
         'QToggle',
         'QSpinnerGears',
         'QSelect',
-        'QDatetime'
+        'QDatetime',
+        'QTable',
+        'QTh',
+        'QTr',
+        'QTd',
+        'QTableColumns',
+        'QSlideTransition'
       ],
       directives: [
         'Ripple',

@@ -3,21 +3,41 @@
     <q-card-title class="bg-primary text-center fondoAzcul">
       INFORMACIÓN GENERAL
     </q-card-title>
-    <q-datetime v-model="today" modal float-label="Fecha" />
-    
+    <div class="col">
     <span class="letrasazules">Usuario creador:  </span> <samp class="letrasUser"> {{userName}} </samp>
-
-    <q-input v-model="text" float-label="Float label & placeholder" placeholder="Placeholder"/>
-
+    </div>
+    <br>
+    <div class="col">
+    <span class="letrasazules">Fecha de inicio:</span>
+    <q-datetime v-model="today" modal float-label="Fecha" />
+    </div>
+    <div class="col">
     <q-card-title class="bg-primary text-center fondoAzcul">
       INFORMACIÓN DEL RECEPTOR
     </q-card-title>
     <span class="letrasazules">Receptor (médico):  </span>
     <selectComponent/>
-    <div class="col-6 mt-2">
+       <div class="col-6 mt-2">
       <q-btn align="between" class="btn-fixed-width espacio" color="primary" label="Buscar" icon="search" @click="datosReceptor()"/>
     </div>
-     <br/>>
+    </div>
+    <div class="col">
+      <span class="letrasazules">Recibe directamente la transferencia de valor:  </span>
+      <q-toggle v-model="visible" label="Recibe Directo" />
+        <q-slide-transition>
+          <p v-show="visible" style="margin: 0; max-width: 500px">
+            <img
+              class="responsive"
+              src="../assets/quasar-logo-full.svg"
+            >
+          </p>
+      </q-slide-transition>
+    </div>
+
+
+    <q-input v-model="text" float-label="Float label & placeholder" placeholder="Placeholder"/>
+
+     <br/>
     <FirmaComponent/>
 
 
@@ -40,6 +60,7 @@ export default {
     return {
       today,
       text: '',
+      visible: true,
       mostrar_form: '',
       dataInfo: '',
       campana: '',
@@ -74,5 +95,11 @@ export default {
   border-radius: 10px;
   padding: 10px;
   size: 17px;
+}
+.letrasazules {
+  color: rgb(3, 144, 187);
+  left: 85%;
+  margin-top: 10px;
+  size: 15px;
 }
 </style>
