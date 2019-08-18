@@ -60,7 +60,7 @@ export default {
   methods:{
     consultar(){
       let opciones = []
-      return bd.get('receptores')
+      return bd.get('Departamentos')
       .then(doc => {
         this.options = doc.data.map(e => {
           return {

@@ -70,8 +70,9 @@
     float-label="Ingrese su dirección detalle"
     />
     </q-field>
-    <selectCiudadComponent/>
+    
     <selectDepartamentoComponent/>
+    <selectCiudadComponent/>
     <selectSociedadCComponent/>
     <q-field
       icon="email"
