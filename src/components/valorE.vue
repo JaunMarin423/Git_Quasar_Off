@@ -9,10 +9,6 @@
       <q-radio v-model="form.efectivo" val="false" color="red" left-label label="No" style="margin-left: 10px" />
         <q-slide-transition>
         <p v-if="form.efectivo === 'true'" style="margin: 0; max-width: 500px">
-          <img
-          class="responsive"
-          src="../assets/quasar-logo-full.svg"
-          >
           <tipodeTransferenciaComponent/>
           <q-input v-model="temp.Inversion" type="number" placeholder="Inversión:"/>
           <br/>
