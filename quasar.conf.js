@@ -86,7 +86,8 @@ module.exports = function (ctx) {
         'QTd',
         'QTableColumns',
         'QSlideTransition',
-        'QRadio'
+        'QRadio',
+        'Dialog'
       ],
       directives: [
         'Ripple',

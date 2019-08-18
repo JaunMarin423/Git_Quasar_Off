@@ -4,7 +4,7 @@
   <q-card-title class="bg-primary text-center fondoAzcul">
     CREACIÓN DE RECEPTOR
   </q-card-title>
-
+  
   <tipoDocumentoSComponent/>
 
       <q-field
@@ -70,6 +70,9 @@
     float-label="Ingrese su dirección detalle"
     />
     </q-field>
+    <selectCiudadComponent/>
+    <selectDepartamentoComponent/>
+    <selectSociedadCComponent/>
     <q-field
       icon="email"
       helper="Correo "
@@ -80,6 +83,8 @@
     float-label="Ingrese su correo"
     />
     </q-field>
+
+    <habesD/>
     
     <FirmaComponent/>
 
@@ -98,11 +103,20 @@
   import { required, email, minLength } from 'vuelidate/lib/validators'
   import tipoDocumentoSComponent from './tipoDocumentoS'
   import FirmaComponent from './firma'
+  import selectCiudadComponent from './selectCiudad'
+  import selectDepartamentoComponent from './selectDepartamento'
+  import selectSociedadCComponent from './selectSociedadC'
+  
+  import habesD from './habesD'
   export default {
     name: 'RegisterFormComponent',
     components: {
       tipoDocumentoSComponent,
-      FirmaComponent
+      FirmaComponent,
+      habesD,
+      selectCiudadComponent,
+      selectDepartamentoComponent,
+      selectSociedadCComponent
   },
     data () {
       return {
