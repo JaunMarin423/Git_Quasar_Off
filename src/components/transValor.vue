@@ -42,12 +42,13 @@
     </q-card-title>
     
     <valorEComponent/>
+    
 
     <q-input v-model="text" float-label="Float label & placeholder" placeholder="Placeholder"/>
 
      <br/>
     <FirmaComponent/>
-
+    <FotoDinamic/>
 
   </div>
 </template>
@@ -57,6 +58,7 @@ import tipoPersonaComponent from '../components/tipoPersona'
 import selectComponent from '../components/select'
 import FirmaComponent from '../components/firma'
 import valorEComponent from '../components/valorE'
+import FotoDinamic from '../components/FotoDinamic'
 
 const today = new Date()
 
@@ -66,7 +68,8 @@ export default {
     selectComponent,
     FirmaComponent,
     tipoPersonaComponent,
-    valorEComponent
+    valorEComponent,
+    FotoDinamic
   },
   data () {
     return {
