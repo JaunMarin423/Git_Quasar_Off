@@ -13,8 +13,11 @@
           <q-input v-model="temp.Inversion" type="number" placeholder="Inversión:"/>
           <br/>
           <q-input v-model="temp.observacion" float-label="Observacion" type="textarea" />
+          <FotoDinamic v-model="temp.captures"></FotoDinamic>
         </p>
+        
       </q-slide-transition>
+      
       </div>
     </q-card> 
   </div>
@@ -22,10 +25,12 @@
 
 <script>
 import tipodeTransferenciaComponent from './tipodeTransferencia'
+import FotoDinamic from '../components/FotoDinamic'
 export default {
   name: 'valorEComponent',
   components: {
-    tipodeTransferenciaComponent
+    tipodeTransferenciaComponent,
+    FotoDinamic
   },
   data () {
     return {

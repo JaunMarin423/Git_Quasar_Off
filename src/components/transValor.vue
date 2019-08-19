@@ -21,34 +21,44 @@
       <q-btn align="between" class="btn-fixed-width espacio" color="primary" label="Buscar" icon="search" @click="datosReceptor()"/>
     </div>
     </div>
-    <div class="col">
+    <br/>
+
+    <q-card-title class="bg-primary text-center fondoAzcul">
+      TRANSFERENCIA DE VALOR
+    </q-card-title>
+
+  <q-table
+    title="Datos de receptor"
+    :data="tableData"
+    :columns="columns"
+    row-key="name"
+  />
+  <br/>
+      <div class="col">
       <span class="letrasazules">Recibe directamente la transferencia de valor:  </span>
       <br/>
        <q-radio v-model="form.recibe_directo" val="1" color="green" left-label label="Si" />
        <q-radio v-model="form.recibe_directo" val="0" color="red" left-label label="No" style="margin-left: 10px" /> 
         <q-slide-transition>
           <p v-if="form.recibe_directo === '0'" style="margin: 0; max-width: 500px">
-            <img
-              class="responsive"
-              src="../assets/quasar-logo-full.svg"
-            >
             <tipoPersonaComponent/>
           </p>
       </q-slide-transition>
     </div>
-
-    <q-card-title class="bg-primary text-center fondoAzcul">
-      TRANSFERENCIA DE VALOR
-    </q-card-title>
+    <br/>
     
+    <q-table
+    title="Datos de receptor"
+    :data="tableData2"
+    :columns="columns2"
+    row-key="name"
+  />
     <valorEComponent/>
-    
 
-    <q-input v-model="text" float-label="Float label & placeholder" placeholder="Placeholder"/>
 
      <br/>
     <FirmaComponent/>
-    <FotoDinamic/>
+    
 
   </div>
 </template>
@@ -58,7 +68,8 @@ import tipoPersonaComponent from '../components/tipoPersona'
 import selectComponent from '../components/select'
 import FirmaComponent from '../components/firma'
 import valorEComponent from '../components/valorE'
-import FotoDinamic from '../components/FotoDinamic'
+import { bd } from "../js/bd";
+
 
 const today = new Date()
 
@@ -69,10 +80,11 @@ export default {
     FirmaComponent,
     tipoPersonaComponent,
     valorEComponent,
-    FotoDinamic
+    
   },
   data () {
     return {
+      receptorD: [],
       today,
       text: '',
       visible: true,
@@ -98,6 +110,144 @@ export default {
       SedeOK:true,
       valor:'',
       cantidad_entregada: '',
+        
+    columns: [
+      { name: 'Tipo de documento',
+        required: true,
+        label: 'Tipo de documento',
+        align: 'left',
+        field: 'tipo_identificacion',
+        sortable: true,
+        classes: 'my-class',
+        style: 'width: 500px'
+      },
+      { name: 'Número',
+        required: true,
+        label: 'Número',
+        align: 'left',
+        field: 'num_identificacion',
+        sortable: true,
+        classes: 'my-class',
+        style: 'width: 500px'
+      },
+      { name: 'Nombre',
+        required: true,
+        label: 'Nombre',
+        align: 'left',
+        field: 'nombre',
+        sortable: true,
+        classes: 'my-class',
+        style: 'width: 500px'
+      },
+      { name: 'Departamento',
+        required: true,
+        label: 'Departamento',
+        align: 'left',
+        field: 'Departamento',
+        sortable: true,
+        classes: 'my-class',
+        style: 'width: 500px'
+      },
+      { name: 'Ciudad',
+        required: true,
+        label: 'Ciudad',
+        align: 'left',
+        field: 'ciudad',
+        sortable: true,
+        classes: 'my-class',
+        style: 'width: 500px'
+      },
+      { name: 'Sociedad Cientifica',
+        required: true,
+        label: 'Sociedad Cientifica',
+        align: 'left',
+        field: 'Sociedad',
+        sortable: true,
+        classes: 'my-class',
+        style: 'width: 500px'
+      },
+      { name: 'Fima habeas data',
+        required: true,
+        label: 'Fima habeas data',
+        align: 'left',
+        field: 'Habeas',
+        sortable: true,
+        classes: 'my-class',
+        style: 'width: 500px'
+      }
+
+      ],
+    tableData: [
+    ],
+    columns2: [
+      { name: 'Nombre',
+        required: true,
+        label: 'Nombre',
+        align: 'left',
+        field: 'tipo',
+        sortable: true,
+        classes: 'my-class',
+        style: 'width: 500px'
+      },
+      { name: 'Departamento',
+        required: true,
+        label: 'Departamento',
+        align: 'left',
+        field: 'nombre',
+        sortable: true,
+        classes: 'my-class',
+        style: 'width: 500px'
+      },
+      { name: 'Ciudad',
+        required: true,
+        label: 'Ciudad',
+        align: 'left',
+        field: 'id_inventario ',
+        sortable: true,
+        classes: 'my-class',
+        style: 'width: 500px'
+      },
+      { name: 'Sociedad Cientifica',
+        required: true,
+        label: 'Sociedad Cientifica',
+        align: 'left',
+        field: 'cantidad_asignada',
+        sortable: true,
+        classes: 'my-class',
+        style: 'width: 500px'
+      },
+      { name: 'Fima habeas data',
+        required: true,
+        label: 'Fima habeas data',
+        align: 'left',
+        field: 'campana',
+        sortable: true,
+        classes: 'my-class',
+        style: 'width: 500px'
+      }
+
+      ],
+    tableData2: [
+    ]
+  
+    }
+  },
+  mounted(){
+    this.datosCampana()
+  },
+  methods:{
+    datosReceptor(){
+      bd.get('receptorD')
+      .then(doc => {
+        this.tableData = doc.data.map(e => e)
+      })
+    },
+    datosCampana(){
+      bd.get('promocion')
+      .then(doc => {
+        this.tableData2 = doc.data.map(e => e)
+        console.log(this.tableData2);
+      })
     }
   }
 }
