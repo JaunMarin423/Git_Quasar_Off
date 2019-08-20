@@ -59,7 +59,6 @@ export default {
         this.error = false
       }
     },
-
   }
 }
 </script>

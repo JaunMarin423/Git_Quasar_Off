@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-select
-      v-model="select"
+      v-model="valor"
       :options="options"
       label="Medico"
     />
@@ -45,7 +45,6 @@ export default {
     return {
       dataInfo:[],
       valor: this.seleccion,
-
       select: 'fb',
       errorerror: true,
       warning: false,
@@ -64,7 +63,7 @@ export default {
         this.options = doc.data.map(e => {
           return {
             label: e.valor,
-            value: e.valor
+            value: e.id,
           }
         })
         })
@@ -75,14 +74,8 @@ export default {
   },
   watch: {
     valor (newseleccion){
-          this.$emit('update:seleccion',newseleccion)
+      this.$emit('hijo',newseleccion)
     },
-    warning (val) {
-      if (val) {
-        this.error = false
-      }
-    },
-
   }
 }
 </script>

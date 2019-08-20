@@ -106,7 +106,7 @@ export default {
       }
     }
   },
-        watch: {
+  watch: {
     valor(temp) {
       this.$emit("update:temp", temp);
     }
