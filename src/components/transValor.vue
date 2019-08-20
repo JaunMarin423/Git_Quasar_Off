@@ -53,7 +53,8 @@
     :data="tableData2"
     :columns="columns2"
     row-key="name"
-  />
+    >
+    </q-table>
   <br/>
     <valorEComponent/>
 
@@ -182,53 +183,44 @@ export default {
     tableData: [
     ],
     columns2: [
-      { name: 'Nombre',
-        required: true,
-        label: 'Nombre',
-        align: 'left',
-        field: 'tipo',
-        sortable: true,
-        classes: 'my-class',
-        style: 'width: 500px'
-      },
-      { name: 'Departamento',
-        required: true,
-        label: 'Departamento',
-        align: 'left',
-        field: 'nombre',
-        sortable: true,
-        classes: 'my-class',
-        style: 'width: 500px'
-      },
-      { name: 'Ciudad',
-        required: true,
-        label: 'Ciudad',
-        align: 'left',
-        field: 'id_inventario ',
-        sortable: true,
-        classes: 'my-class',
-        style: 'width: 500px'
-      },
-      { name: 'Sociedad Cientifica',
-        required: true,
-        label: 'Sociedad Cientifica',
-        align: 'left',
-        field: 'cantidad_asignada',
-        sortable: true,
-        classes: 'my-class',
-        style: 'width: 500px'
-      },
-      { name: 'Fima habeas data',
-        required: true,
-        label: 'Fima habeas data',
-        align: 'left',
-        field: 'campana',
-        sortable: true,
-        classes: 'my-class',
-        style: 'width: 500px'
-      }
-
-      ],
+    { 
+      name: 'campana',
+      required: true,
+      label: 'campaña',
+      align: 'left',
+      field: 'campana',
+      sortable: true,
+      classes: 'my-class',
+      style: 'width: 500px'
+    },
+    { name: 'nombre',
+      required: true,
+      label: 'nombre',
+      align: 'left',
+      field: 'nombre',
+      sortable: true,
+      classes: 'my-class',
+      style: 'width: 500px'
+    },
+    { name: 'tipo',
+      required: true,
+      label: 'tipo',
+      align: 'left',
+      field: 'tipo',
+      sortable: true,
+      classes: 'my-class',
+      style: 'width: 500px'
+    },
+    { name: 'cantidad disponible',
+      required: true,
+      label: 'Cantidad disponible',
+      align: 'left',
+      field: 'cantidad_disponible',
+      sortable: true,
+      classes: 'my-class',
+      style: 'width: 500px'
+    },
+   ],
     tableData2: [
     ]
   
