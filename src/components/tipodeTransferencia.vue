@@ -2,11 +2,11 @@
   <div>
     <span class="letrasazules">Tipo de transferencia:</span>
     <q-select
-      v-model="select"
+      v-model="seleccionado"
       :options="options"
-      label="Medico"
+      label="... seleccionar ..."
     />
-    
+    <p>{{seleccionado}}</p>
   </div>
 </template>
 
@@ -20,33 +20,10 @@ export default {
     prop:'Selecccion',
     event:'update'
   },
-  props:{
-    tabla:{
-      type: String,
-      default: ''
-      },
-    campo:{
-      type: String,
-      default: ''
-    },
-    seleccion:{      
-      type: Number | String,
-      default: 0
-    },
-    label:{
-      type: String,
-      default: ''
-    },
-    disabled:{
-      type: Boolean,
-      default: false
-    }
-  },
   data () {
     return {
       dataInfo:[],
-      valor: this.seleccion,
-
+      valor: this.options,
       select: 'fb',
       errorerror: true,
       warning: false,
@@ -56,27 +33,32 @@ export default {
   },
   mounted () {
    this.consultar()
+   this.$emit('calor_hijo',options)
   },
   methods:{
     consultar(){
       let opciones = []
       return bd.get('transerencia')
       .then(doc => {
-      console.log(doc)
+        console.log(doc.data)
+        
+        console.log('hola1')
         this.options = doc.data.map(e => {
           return {
             label: e.text,
             value: e.value
           }
+          
         })
         })
-        
-      console.log('opciones', this.options)
     }
   },
   watch: {
     valor (newseleccion){
-          this.$emit('update:seleccion',newseleccion)
+      this.seleccionado = newseleccion
+      console.log('select', this.seleccionado);
+       
+      this.$emit('calor_hijo',newseleccion)
     },
     warning (val) {
       if (val) {

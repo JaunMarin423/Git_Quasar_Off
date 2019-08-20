@@ -7,25 +7,25 @@
             <div class="modal-container">
               <div class="modal-header">
                 <q-btn
-                  @click="cerrar"
-                  class="vs-popup--close vs-popup--close--icon modal-default-button"
-                  style="{background: _color.getColor(this.backgroundColorPopup,1)}"
                   icon="close"
+                  class="vs-popup--close vs-popup--close--icon modal-default-button"
+                  @click="cerrar"
+                  color="red"
+                  style="{background: _color.getColor(this.backgroundColorPopup,1)}"
                   type="filled"
-                  color="rgb(255,255, 255)"
                 ></q-btn>
-                <q-slot name="header"></q-slot>
+                <slot name="header"></slot>
               </div>
 
               <div class="modal-body">
-                <slot name="body">
+                <div name="body">
                   <!-- ---  -->
                   <div id="camera">
                     <video ref="video" id="video" @click="capture" playsinline autoplay></video>
                     <canvas ref="canvas" id="canvas" width="680" height="480"></canvas>
                   </div>
-                  <q-row vs-w="12">
-                    <q-col
+                  <div vs-w="12">
+                    <div
                       vs-type="flex"
                       vs-justify="center"
                       vs-lg="3"
@@ -36,10 +36,10 @@
                       <q-btn @click="imagenClick(index)" color="primary" type="line">
                         <img :src="capture" height="90" />
                       </q-btn>
-                    </q-col>
-                  </q-row>
+                    </div>
+                  </div>
                   <!-- ---  -->
-                </slot>
+                </div>
               </div>
 
               <div class="modal-footer">
@@ -50,13 +50,13 @@
         </div>
       </transition>
     </div>
-
+    <br/>
     <q-btn @click="mostrar" type="line" size="large">
-      <q-icon icon="photo_camera" size="70px"></q-icon>
+      <q-icon class="centrado" name="photo_camera" color="primary" size="50px"/>
     </q-btn>
 
-    <q-row vs-w="12">
-      <q-col
+    <div vs-w="12">
+      <div
         vs-type="flex"
         vs-justify="center"
         vs-lg="3"
@@ -66,13 +66,14 @@
         style="padding: 10px;"
       >
         <img :src="capture" height="90" />
-      </q-col>
-    </q-row>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import camara from "./camara";
+import camara from "./camara"
+import { Notify } from 'quasar'
 
 export default {
   name: "FotoDinamic",
@@ -122,11 +123,14 @@ export default {
         .drawImage(this.videoElement, 0, 0, 680, 480);
       this.cmpCaptures.push(this.canvas.toDataURL("image/png"));
       console.log('capture', this.cmpCaptures, 'canvas', this.canvas)
-      this.$vs.dialog({color: "success",
-      title: "Foto registrada correctamente",
+      this.$q.notify({
+        color: "positive",
+        textColor :"black",
+        message: "Foto registrada correctamente",
+        icon: "check"
       })
       // }else{
-      //   this.$vs.notify({title:'Notificación',text:'Se llego al numero maximo de fotos'})
+      //   this.$q.notify({title:'Notificación',text:'Se llego al numero maximo de fotos'})
       // }
       this.$emit("input", this.cmpCaptures);
       this.cmpCaptures = []
@@ -139,7 +143,7 @@ export default {
       const tracks = window.stream.getTracks();
       tracks.map(track => track.stop());
       this.$emit("close");
-      this.cmpCaptures.splice(index, 1); // elimino el elemento seleccionado
+      // this.cmpCaptures.splice(index, 1); // elimino el elemento seleccionado *** se comentarea por error generado
     },
     mostrar() {
       this.showModal = true;
@@ -236,6 +240,9 @@ li {
   align-items: center;
   display: flex;
   flex-flow: column;
+}
+.centrado{
+  margin-left: 150px;
 }
 </style>
 

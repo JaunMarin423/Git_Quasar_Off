@@ -7,7 +7,7 @@
   
   <tipoDocumentoSComponent/>
 
-      <q-field
+    <q-field
       icon="pcredit_card"
       helper="Número de documento"
     >
@@ -20,11 +20,12 @@
         :error="$v.register.displayName.$error"
       />
     </q-field>
+    <br/>
      <q-btn color="primary" text-color="white" icon="youtube_searched_for" label="Validar documento" />
 
     <q-field
       icon="perm_identity"
-      :helper="$t('display_name_help')"
+      helper="Nombre"
     >
       <q-input
         v-model="form.nombre"
