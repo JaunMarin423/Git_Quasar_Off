@@ -42,12 +42,12 @@
        <q-radio v-model="form.recibe_directo" val="0" color="red" left-label label="No" style="margin-left: 10px" /> 
         <q-slide-transition>
           <p v-if="form.recibe_directo === '0'" style="margin: 0; max-width: 500px">
-            <tipoPersonaComponent/>
+            <tipoPersonaComponent @tT="form.id_tipo_tercero = $event"/>
           </p>
       </q-slide-transition>
     </div>
+
     <br/>
-    
     <q-table
     title="Datos de receptor"
     :data="tableData2"

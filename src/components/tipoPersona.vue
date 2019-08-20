@@ -2,7 +2,7 @@
   <div>
     <span class="letrasazules">Tipo de tercero</span>
     <q-select
-      v-model="select"
+      v-model="valor"
       :options="options"
       label="Medico"
     />
@@ -75,7 +75,7 @@ export default {
   },
   watch: {
     valor (newseleccion){
-          this.$emit('update:seleccion',newseleccion)
+          this.$emit('tT',newseleccion)
     },
     warning (val) {
       if (val) {
