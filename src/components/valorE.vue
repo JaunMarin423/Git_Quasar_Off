@@ -3,6 +3,7 @@
     <q-card-title class="bg-primary text-center fondoAzcul">
      TRANSFERENCIAS DE VALOR
     </q-card-title>
+    <br/>
     <q-card> 
       <div class="col">
       <q-radio v-model="form.efectivo" val="true" color="green" left-label label="Si" />

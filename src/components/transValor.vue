@@ -3,6 +3,7 @@
     <q-card-title class="bg-primary text-center fondoAzcul">
       INFORMACIÓN GENERAL
     </q-card-title>
+    <br/>
     <div class="col">
     <span class="letrasazules">Usuario creador:  </span> <samp class="letrasUser"> {{userName}} </samp>
     </div>
@@ -53,6 +54,7 @@
     :columns="columns2"
     row-key="name"
   />
+  <br/>
     <valorEComponent/>
 
 
