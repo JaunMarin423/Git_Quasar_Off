@@ -85,8 +85,6 @@ export default {
   },
   methods:{
     nuevo() {
-      console.log(this.temp.tipoR);
-      
       if (this.temp.Inversion === "" || this.temp.tipoR === "") {
         this.$q.notify({
           color: "red",
@@ -95,8 +93,6 @@ export default {
           icon: "close"
       })
       } else {
-        console.log(this.temp.tipoR);
-        
         this.form.transValor.push({
           inversion: this.temp.Inversion,
           observacion: this.temp.observacion,

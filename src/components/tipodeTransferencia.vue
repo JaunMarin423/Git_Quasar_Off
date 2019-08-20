@@ -2,11 +2,10 @@
   <div>
     <span class="letrasazules">Tipo de transferencia:</span>
     <q-select
-      v-model="seleccionado"
+      v-model="valor"
       :options="options"
       label="... seleccionar ..."
     />
-    <p>{{seleccionado}}</p>
   </div>
 </template>
 
@@ -40,9 +39,6 @@ export default {
       let opciones = []
       return bd.get('transerencia')
       .then(doc => {
-        console.log(doc.data)
-        
-        console.log('hola1')
         this.options = doc.data.map(e => {
           return {
             label: e.text,
@@ -56,8 +52,6 @@ export default {
   watch: {
     valor (newseleccion){
       this.seleccionado = newseleccion
-      console.log('select', this.seleccionado);
-       
       this.$emit('calor_hijo',newseleccion)
     },
     warning (val) {
