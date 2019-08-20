@@ -80,12 +80,10 @@
     </q-table>
   <br/>
     <valorEComponent/>
-
-
      <br/>
-    <FirmaComponent/>
-    
-
+    <FirmaComponent @firma="form.firma = $event"/>
+    <br/>
+    <q-btn align="between" class="btn-fixed-width centrar" color="green" label="Guardar Formulario" icon="send" @click="validacion()" />
   </div>
 </template>
 
@@ -307,5 +305,8 @@ export default {
   left: 85%;
   margin-top: 10px;
   size: 15px;
+}
+.centrar{
+  margin-left: 90px;
 }
 </style>
