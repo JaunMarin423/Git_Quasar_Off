@@ -115,7 +115,7 @@ export default {
       mostrar_form: '',
       dataInfo: '',
       campana: '',
-      userName: sessionStorage.idsec_users,
+      userName: sessionStorage.user,
       id_periodo: sessionStorage.id_periodo,
       form: {
         id_cliente: '',

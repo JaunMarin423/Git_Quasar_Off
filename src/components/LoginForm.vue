@@ -7,9 +7,7 @@
       <q-input
         v-model="login.email"
         float-label="Usuario"
-        @blur="$v.login.email.$touch"
         @keyup.enter="submit"
-        :error="$v.login.email.$error"
       />
     </q-field>
 
@@ -21,9 +19,7 @@
         type="password"
         v-model="login.password"
         float-label="Contraseña"
-        @blur="$v.login.password.$touch"
         @keyup.enter="submit"
-        :error="$v.login.password.$error"
       />
     </q-field>
 
