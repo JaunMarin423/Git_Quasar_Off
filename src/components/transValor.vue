@@ -54,6 +54,29 @@
     :columns="columns2"
     row-key="name"
     >
+
+      <q-tr slot="body" slot-scope="props" :props="props">
+        <q-td key="campana" :props="props">
+          <span>{{ props.row.campana }}</span>
+        </q-td>
+        <q-td key="nombre" :props="props">
+          <span>{{ props.row.nombre }}</span>
+        </q-td>
+        <q-td key="tipo" :props="props">
+          <span>{{ props.row.tipo }}</span>
+        </q-td>
+        <q-td key="cantidad_disponible" :props="props">
+          <span>{{ props.row.cantidad_disponible }}</span>
+        </q-td>
+        <q-td key="cantidad_entregada" :props="props">
+           <div class="row items-center justify-between no-wrap">
+             <q-btn size="sm" round dense color="primary" icon="remove" @click="props.row.cantidad_entregada--" class="q-mr-xs" />
+            <q-btn size="sm" round dense color="green" icon="add"  @click="props.row.cantidad_entregada++" class="q-mr-sm" /> 
+            <div>{{ props.row.cantidad_entregada }}</div>
+          </div>
+        </q-td>
+      </q-tr>
+
     </q-table>
   <br/>
     <valorEComponent/>
@@ -211,7 +234,7 @@ export default {
       classes: 'my-class',
       style: 'width: 500px'
     },
-    { name: 'cantidad disponible',
+    { name: 'cantidad_disponible',
       required: true,
       label: 'Cantidad disponible',
       align: 'left',
@@ -220,6 +243,15 @@ export default {
       classes: 'my-class',
       style: 'width: 500px'
     },
+    { name: 'cantidad_entregada',
+      required: true,
+      label: 'Cantidad entregada',
+      align: 'left',
+      field: 'cantidad_entregada',
+      sortable: true,
+      classes: 'my-class',
+      style: 'width: 500px'
+    }
    ],
     tableData2: [
     ]
@@ -227,7 +259,7 @@ export default {
     }
   },
   mounted(){
-    this.datosCampana()
+    this.promocion()
   },
   methods:{
     datosReceptor(){
@@ -236,13 +268,28 @@ export default {
         this.tableData = doc.data.map(e => e)
       })
     },
-    datosCampana(){
+    promocion(){
       bd.get('promocion')
       .then(doc => {
         this.tableData2 = doc.data.map(e => e)
         console.log(this.tableData2);
       })
-    }
+    },
+    validacion () {
+      var array1 = this.form.campana;
+      var array2 = this.form.transfer;
+      let entregados = array1.filter(element => element.cantidad_entregada > 0);
+      if(entregados.length <= 0 && array2.length == 0){
+      this.$q.notify({
+        color: "red",
+        textColor :"white",
+        message: "Diligencie la transferencia ó elemento entregado",
+        icon: "error"
+      })
+        return false
+      }
+      return true
+    },
   }
 }
 </script>
