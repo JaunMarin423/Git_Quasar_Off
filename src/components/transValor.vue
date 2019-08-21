@@ -119,7 +119,7 @@ export default {
       mostrar_form: '',
       dataInfo: '',
       campana: '',
-      userName: sessionStorage.user,
+      userName: sessionStorage.idsec_users,
       id_periodo: sessionStorage.id_periodo,
       form: {
         id_cliente: '',
@@ -263,8 +263,21 @@ export default {
   },
   mounted(){
     this.promocion()
+    this.configuracion()
   },
   methods:{
+    configuracion(){
+      if (this.userName === undefined) {
+          this.$q.notify({
+          color: "warning",
+          textColor :"black",
+          message: "Por favor ir a configuración",
+          icon: "warning",
+          timeout: 10000,
+          position: 'center',
+        })
+      }
+    },
     datosReceptor(){
       bd.get('receptorD')
       .then(doc => {

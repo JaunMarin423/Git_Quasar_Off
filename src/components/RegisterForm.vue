@@ -125,6 +125,7 @@
   },
     data () {
       return {
+        userName: sessionStorage.idsec_users,
         register: {
           displayName: '',
           email: '',
@@ -163,8 +164,10 @@
     }
   },
   mounted () {
-    this.consultSelDepartamento(),
+    this.configuracion()
+    this.consultSelDepartamento()
     this.consultSelCity ()
+    
   },
     validations: {
       register: {
@@ -174,6 +177,18 @@
       }
     },
     methods: {
+    configuracion(){
+      if (this.userName === undefined) {
+          this.$q.notify({
+          color: "warning",
+          textColor :"black",
+          message: "Por favor ir a configuración",
+          icon: "warning",
+          timeout: 10000,
+          position: 'center',
+        })
+      }
+    },
       submit () {
         this.$v.register.$touch()
         if (this.$v.register.$error) {
