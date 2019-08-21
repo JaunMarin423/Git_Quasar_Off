@@ -83,7 +83,7 @@
      <br/>
     <FirmaComponent @firma="form.firma = $event"/>
     <br/>
-    <q-btn align="between" class="btn-fixed-width centrar" color="green" label="Guardar Formulario" icon="send" @click="creacionFormulario()" />
+    <q-btn align="between" class="btn-fixed-width centrar" color="green" label="Guardar Formulario" icon="send" @click="creacionFormularioOFF()" />
   </div>
 </template>
 
@@ -95,6 +95,7 @@ import FirmaComponent from '../components/firma'
 import valorEComponent from '../components/valorE'
 import {peticiones} from '../js/peticiones'
 import { bd } from "../js/bd";
+import { bdt } from "../js/BDTransValor";
 
 
 const today = new Date()
@@ -130,6 +131,7 @@ export default {
         campana: [],
         transfer:[],
         firma: [],
+        _id: 'transfer_'+Date.now(),
       },
       num_identificacion: 0,
       captures: [],
@@ -369,7 +371,6 @@ export default {
               case 401: // Error Autenticación error token
                 this.mensaje_notificacion('danger','Error Autenticación error token' + aux_accion)
               break;
-
             }
             this.rspValidacion(Data.status)
           })
@@ -442,6 +443,182 @@ export default {
                 }
             this.rspValidacion(Data.status)
           })
+      }
+      }
+      }
+      }
+    },
+    creacionFormularioOFF () {
+      if(this.form.recibe_directo == 0 ){
+        if (this.form.id_cliente == '')
+          {
+            delete this.form.firma
+              this.$q.notify({
+                color: "warning",
+                textColor :"black",
+                message: "Seleccione el receptor",
+                icon: "warning"
+              })
+          }else{
+            if(this.form.id_tipo_tercero == ''){
+            delete this.form.firma
+            this.$q.notify({
+              color: "warning",
+              textColor :"black",
+              message: "Seleccione el tipo tercero",
+              icon: "warning"
+              
+            })
+            }else{
+          if(this.form.fecha_inicio == ''){
+            delete this.form.firma
+              this.$q.notify({
+                color: "warning",
+                textColor :"black",
+                message: "Seleccione fecha",
+                icon: "warning"
+              })
+            }else{
+            if(this.form.recibe_directo == ''){
+            delete this.form.firma
+              this.$q.notify({
+                color: "warning",
+                textColor :"black",
+                message: "Seleccione si recibe directamente",
+                icon: "warning"
+              })
+            }else if(this.validacion()){
+      // this.$q.loading.show()
+      if (this.form.firma == '') {
+        delete this.form.firma
+      }
+      this.form.login= sessionStorage.idsec_users,
+      this.form.id_periodo= sessionStorage.id_periodo,
+      this.form = {
+        _id: Date.now(),
+      }
+      bdT.put(JSON.stringify(this.form))
+       this.$q.notify({
+                    color: "green",
+                    textColor :"black",
+                    message: "Envíos exitosos.",
+                    icon: "done",
+                    timeout: 3000,
+                    closeBtn: location.reload()
+                  })
+      // this.axiosModelo('/transferenciaValor','POST',this.form)
+      // .then((Data) => {
+      //       Loading.hide()
+      //       switch (Data.status){
+      //         case 203: // Error Autenticación error token
+      //           this.$q.notify({
+      //             color: "red",
+      //             textColor :"black",
+      //             message: "Error foto",
+      //             icon: "clear"
+      //           })
+      //         break;
+      //         case 201: //OK
+      //           Loading.hide()
+      //           this.form.id_cliente=''
+      //           this.form.fecha_inicio=''
+      //           this.form.recibe_directo=''
+      //           this.form.direccion=''
+      //             this.$q.notify({
+      //               color: "green",
+      //               textColor :"black",
+      //               message: "Envíos exitosos.",
+      //               icon: "done",
+      //               timeout: 3000,
+      //               closeBtn: location.reload()
+      //             })
+      //         break;
+      //         case 401: // Error Autenticación error token
+      //           this.mensaje_notificacion('danger','Error Autenticación error token' + aux_accion)
+      //         break;
+      //       }
+      //       this.rspValidacion(Data.status)
+      //     })
+          }
+          }
+          }
+          }
+      }else{
+        if (this.form.id_cliente == ''){
+              this.$q.notify({
+                color: "warning",
+                textColor :"black",
+                message: "Seleccione el receptor",
+                icon: "warning"
+              })
+        }else{
+          if(this.form.fecha_inicio == ''){
+           delete this.form.firma
+              this.$q.notify({
+                color: "warning",
+                textColor :"black",
+                message: "Seleccione fecha",
+                icon: "warning"
+              })
+          }else{
+          if(this.form.recibe_directo == ''){
+              this.$q.notify({
+                color: "warning",
+                textColor :"black",
+                message: "Seleccione si recibe directamente",
+                icon: "warning"
+              })
+          }else if(this.validacion()){
+          // this.$q.loading.show()
+          console.log('holas');
+          if (this.form.firma == '') {
+            delete this.form.firma
+          }
+          this.form.login= sessionStorage.idsec_users,
+          this.form.id_periodo= sessionStorage.id_periodo,
+          bdt.put(this.form)
+          console.log(this.form);
+          // this.$q.notify({
+          //               color: "green",
+          //               textColor :"black",
+          //               message: "Envíos exitosos.",
+          //               icon: "done",
+          //               timeout: 3000,
+          //               // closeBtn: location.reload()
+          //             })
+          // this.axiosModelo('/transferenciaValor','POST',this.form)
+          // .then((Data) => {
+          //       Loading.hide()
+          //       switch (Data.status){
+          //         case 203: // Error Autenticación error token
+          //           this.$q.notify({
+          //             color: "red",
+          //             textColor :"black",
+          //             message: "Valide que todos los campos tengan algun valor",
+          //             icon: "clear",
+          //           }) 
+          //         break;
+          //         case 201: //OK
+          //           Loading.hide()
+          //           this.form.id_cliente=''
+          //           this.form.fecha_inicio=''
+          //           this.form.recibe_directo=''
+          //           this.form.direccion=''
+          //            this.$q.notify({
+          //           color: "green",
+          //           textColor :"black",
+          //           message: "Envíos exitosos.",
+          //           icon: "done",
+          //           timeout: 3000,
+          //           closeBtn: location.reload()
+          //         })
+          //         break;
+          //         case 401: // Error Autenticación error token
+          //           this.mensaje_notificacion('danger','Error Autenticación error token' + aux_accion)
+          //         break;
+          //       }
+          //   this.rspValidacion(Data.status)
+          // })
       }
       }
       }
