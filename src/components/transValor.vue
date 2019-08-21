@@ -94,8 +94,8 @@ import selectComponent from '../components/select'
 import FirmaComponent from '../components/firma'
 import valorEComponent from '../components/valorE'
 import {peticiones} from '../js/peticiones'
-import { bd } from "../js/bd";
-import { bdt } from "../js/BDTransValor";
+import { bd } from "../js/bd"
+import { bdt } from "../js/BDTransValor"
 
 
 const today = new Date()
@@ -488,16 +488,13 @@ export default {
                 icon: "warning"
               })
             }else if(this.validacion()){
-      // this.$q.loading.show()
+      //  this.$q.loading.show()
       if (this.form.firma == '') {
         delete this.form.firma
       }
       this.form.login= sessionStorage.idsec_users,
       this.form.id_periodo= sessionStorage.id_periodo,
-      this.form = {
-        _id: Date.now(),
-      }
-      bdT.put(JSON.stringify(this.form))
+      bdt.put(this.form)
        this.$q.notify({
                     color: "green",
                     textColor :"black",
@@ -569,23 +566,23 @@ export default {
                 icon: "warning"
               })
           }else if(this.validacion()){
-          // this.$q.loading.show()
+          //  this.$q.loading.show()
           console.log('holas');
+          
           if (this.form.firma == '') {
             delete this.form.firma
           }
           this.form.login= sessionStorage.idsec_users,
           this.form.id_periodo= sessionStorage.id_periodo,
           bdt.put(this.form)
-          console.log(this.form);
-          // this.$q.notify({
-          //               color: "green",
-          //               textColor :"black",
-          //               message: "Envíos exitosos.",
-          //               icon: "done",
-          //               timeout: 3000,
-          //               // closeBtn: location.reload()
-          //             })
+          this.$q.notify({
+            color: "green",
+            textColor :"black",
+            message: "Envíos exitosos.",
+            icon: "done",
+            timeout: 3000,
+            // closeBtn: location.reload()
+          })
           // this.axiosModelo('/transferenciaValor','POST',this.form)
           // .then((Data) => {
           //       Loading.hide()

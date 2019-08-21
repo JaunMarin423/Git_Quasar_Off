@@ -13,7 +13,7 @@ var dbR = new PouchDB('ControlpharmR');
 //   }
 // )
 
-export const dbR = {
+export const dbr = {
   put (data) {
     return dbR.put(data)
   },
