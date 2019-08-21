@@ -101,8 +101,10 @@ import {peticiones} from '../js/peticiones'
 import { bd } from "../js/bd"
 import { bdt } from "../js/BDTransValor"
 import { mapState } from 'vuex'
+import { date } from 'quasar'
 
 const today = new Date()
+const { startOfDate, addToDate, subtractFromDate } = date
 
 export default {
  name: 'transValorComponent',
@@ -144,6 +146,11 @@ computed: {
       activarCamara:true,
       SedeOK:true,
       valor:'',
+      today,
+      tomorrow: addToDate(today, { days: 1 }),
+      yesterday: subtractFromDate(today, { days: 1 }),
+      state: new Date(),
+      defaultValue: startOfDate(today, 'year'),
         
     columns: [
       { name: 'Tipo de documento',
