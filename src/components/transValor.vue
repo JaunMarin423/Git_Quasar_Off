@@ -50,7 +50,7 @@
     <br/>
     <q-table
     title="Datos de receptor"
-    :data="tableData2"
+    :data="cantidad_entregada"
     :columns="columns2"
     row-key="name"
     >
@@ -79,19 +79,21 @@
 
     </q-table>
   <br/>
-    <valorEComponent/>
+    <valorEComponent @temp="form.transfer = $event"/>
      <br/>
     <FirmaComponent @firma="form.firma = $event"/>
     <br/>
-    <q-btn align="between" class="btn-fixed-width centrar" color="green" label="Guardar Formulario" icon="send" @click="validacion()" />
+    <q-btn align="between" class="btn-fixed-width centrar" color="green" label="Guardar Formulario" icon="send" @click="creacionFormulario()" />
   </div>
 </template>
 
 <script>
+import { Loading } from 'quasar'
 import tipoPersonaComponent from '../components/tipoPersona'
 import selectComponent from '../components/select'
 import FirmaComponent from '../components/firma'
 import valorEComponent from '../components/valorE'
+import {peticiones} from '../js/peticiones'
 import { bd } from "../js/bd";
 
 
@@ -99,6 +101,7 @@ const today = new Date()
 
 export default {
  name: 'transValorComponent',
+ mixins:[peticiones],
     components: {
     selectComponent,
     FirmaComponent,
@@ -133,7 +136,6 @@ export default {
       activarCamara:true,
       SedeOK:true,
       valor:'',
-      cantidad_entregada: '',
         
     columns: [
       { name: 'Tipo de documento',
@@ -252,7 +254,7 @@ export default {
       style: 'width: 500px'
     }
    ],
-    tableData2: [
+    cantidad_entregada: [
     ]
   
     }
@@ -270,8 +272,9 @@ export default {
     promocion(){
       bd.get('promocion')
       .then(doc => {
-        this.tableData2 = doc.data.map(e => e)
+        this.cantidad_entregada = doc.data.map(e => e)
       })
+    
     },
     validacion () {
       var array1 = this.form.campana;
@@ -289,6 +292,7 @@ export default {
       }
       return true
     },
+ 
     creacionFormulario () {
       if(this.form.recibe_directo == 0 ){
         if (this.form.id_cliente == '')
@@ -329,7 +333,7 @@ export default {
                 icon: "warning"
               })
             }else if(this.validacion()){
-      this.$vs.loading ()
+      this.$q.loading.hide()
       if (this.form.firma == '') {
         delete this.form.firma
       }
@@ -337,7 +341,7 @@ export default {
       this.form.id_periodo= sessionStorage.id_periodo,
       this.axiosModelo('/transferenciaValor','POST',this.form)
       .then((Data) => {
-            this.$vs.loading.close()
+            Loading.hide()
             switch (Data.status){
               case 203: // Error Autenticación error token
                 this.$q.notify({
@@ -348,7 +352,7 @@ export default {
                 })
               break;
               case 201: //OK
-                this.$vs.loading.close();
+                Loading.hide()
                 this.form.id_cliente=''
                 this.form.fecha_inicio=''
                 this.form.recibe_directo=''
@@ -399,7 +403,7 @@ export default {
                 icon: "warning"
               })
           }else if(this.validacion()){
-          this.$vs.loading ()
+          this.$q.loading.hide()
           if (this.form.firma == '') {
             delete this.form.firma
           }
@@ -407,7 +411,7 @@ export default {
           this.form.id_periodo= sessionStorage.id_periodo,
           this.axiosModelo('/transferenciaValor','POST',this.form)
           .then((Data) => {
-                this.$vs.loading.close()
+                Loading.hide()
                 switch (Data.status){
                   case 203: // Error Autenticación error token
                     this.$q.notify({
@@ -418,7 +422,7 @@ export default {
                     }) 
                   break;
                   case 201: //OK
-                    this.$vs.loading.close();
+                    Loading.hide()
                     this.form.id_cliente=''
                     this.form.fecha_inicio=''
                     this.form.recibe_directo=''

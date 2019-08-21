@@ -40,12 +40,13 @@ export default {
     save() {
       const { isEmpty, data } = this.$refs.signaturePad.saveSignature();
       this.$emit('firma', data)
-      this.$vs.dialog({color: "success",
-         color: "success",
-         title: "Firma guardada",
-        })
+      this.$q.notify({
+        color: "green",
+        textColor :"black",
+        message: "Firma guardada",
+        icon: "done",
+      })
       // console.log(isEmpty);
-      console.log(data);
       // console.log('prueba de firma', data);
       // console.log(isEmpty);
       

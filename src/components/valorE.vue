@@ -108,7 +108,7 @@ export default {
   },
   watch: {
     valor(temp) {
-      this.$emit("update:temp", temp);
+      this.$emit("temp",  this.form.transValor);
     }
   }
 }
