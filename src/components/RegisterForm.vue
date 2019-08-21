@@ -17,11 +17,10 @@
         float-label="Número de documento"
         @blur="$v.register.displayName.$touch"
         @keyup.enter="submit"
-        :error="$v.register.displayName.$error"
       />
     </q-field>
     <br/>
-     <q-btn color="primary" text-color="white" icon="youtube_searched_for" label="Validar documento" />
+     <q-btn color="primary" text-color="white" icon="youtube_searched_for" label="Validar documento" @click="buscarCc ()"/>
 
     <q-field
       icon="perm_identity"
@@ -32,7 +31,6 @@
         :float-label="$t('display_name')"
         @blur="$v.register.displayName.$touch"  
         @keyup.enter="submit"
-        :error="$v.register.displayName.$error"
       />
     </q-field>
     <q-field
@@ -108,10 +106,12 @@
   import selectCiudadComponent from './selectCiudad'
   import selectDepartamentoComponent from './selectDepartamento'
   import selectSociedadCComponent from './selectSociedadC'
+  import { peticiones } from "../js/peticiones.js"
   
   import habesD from './habesD'
   export default {
     name: 'RegisterFormComponent',
+    mixins:[peticiones],
     components: {
       tipoDocumentoSComponent,
       FirmaComponent,
@@ -166,7 +166,33 @@
         } else {
           this.$emit('onRegister', this.register)
         }
-      }
+      },
+      buscarCc () {
+      this.$q.loading.show
+      this.axiosModeloGET('/solicitud/' + this.form.num_identificacion)
+        .then(Data =>{ 
+          this.$q.loading.hide() 
+          if(Array.isArray(Data.data.data.data)){
+            this.dataInfo =  Data.data.data.data
+            this.$q.notify({
+            message: 'El número de documento sé encuentra registrado',
+            position: 'top',
+            type: 'red',
+            icon: 'warning'
+            })
+          }else{
+            this.dataInfo = []
+            this.$q.notify({
+            message: 'El número de documento no se encuentra registrado',
+            position: 'top',
+            type: 'green',
+            icon: 'done'
+            })
+          }
+        })
+        this.ActivoBoton = true
+        this.Activoform = false
+    },
     }
   }
 </script>

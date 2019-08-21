@@ -33,12 +33,53 @@ export default {
       // Arrays quemados OJO!
       arrayTablas: [
         {
-          nombreTabla: "selectMedico",
+          nombreTabla: "Datos del medico",
           url:
             "/selectMedico/admin/num_identificacion",
           checked: true,
           loading: false,
           id: "receptores"
+        },
+        {
+          nombreTabla: "Detalle del medico",
+          url:
+            "/receptorDetail/100790",
+          checked: true,
+          loading: false,
+          id: "receptorD"
+        },
+        {
+          nombreTabla: "Promoción",
+          url:
+            "/promocion/admin/3",
+          checked: true,
+          loading: false,
+          id: "promocion"
+        },
+        {
+          nombreTabla: "Tipo de transferencia",
+          url:
+            "/selecte/visitador_tipo_transferencias/nombre/id_tipo_transferencia",
+          checked: true,
+          loading: false,
+          id: "transerencia"
+        },
+        {
+          nombreTabla: "Tipo de datos",
+          url:
+            "/selecte/visitador_tipos_tercero/nombre/id_tipo_tercero",
+          checked: true,
+          loading: false,
+          id: "terceros"
+        },
+        
+        {
+          nombreTabla: "Permisos",
+          url:
+            "/permisos",
+          checked: true,
+          loading: false,
+          id: "permisos"
         },
         {
           nombreTabla: "Ciudades",
@@ -49,15 +90,15 @@ export default {
           id: "ciudades"
         },
         {
-          nombreTabla: "DetalleReceptor",
+          nombreTabla: "Departamentos",
           url:
-            "/receptorDetail/100790",
+            "/api/citys/Departamento",
           checked: true,
           loading: false,
-          id: "receptorD"
+          id: "departamentos"
         },
         {
-          nombreTabla: "CentrosP",
+          nombreTabla: "Centros poblados",
           url:
             "/tablas_datos",
           checked: true,
@@ -65,47 +106,7 @@ export default {
           id: "centrosp"
         },
         {
-          nombreTabla: "Promocion",
-          url:
-            "/promocion/admin/3",
-          checked: true,
-          loading: false,
-          id: "promocion"
-        },
-        {
-          nombreTabla: "Departamentos",
-          url:
-            "/citys/Departamento",
-          checked: true,
-          loading: false,
-          id: "departamentos"
-        },
-        {
-          nombreTabla: "T.transerencia",
-          url:
-            "/selecte/visitador_tipo_transferencias/nombre/id_tipo_transferencia",
-          checked: true,
-          loading: false,
-          id: "transerencia"
-        },
-        {
-          nombreTabla: "Permisos",
-          url:
-            "/permisos",
-          checked: true,
-          loading: false,
-          id: "permisos"
-        },
-        {
-          nombreTabla: "T.Terceros",
-          url:
-            "/selecte/visitador_tipos_tercero/nombre/id_tipo_tercero",
-          checked: true,
-          loading: false,
-          id: "terceros"
-        },
-        {
-          nombreTabla: "T.identificacion",
+          nombreTabla: "Tipo de identificacion",
           url:
             "/selecte/tipo_identificacion/identificacion/cod_ident",
           checked: true,
@@ -113,7 +114,7 @@ export default {
           id: "identificacion"
         },
         {
-          nombreTabla: "V.SociedadC",
+          nombreTabla: "Sociedad cientifica",
           url:
             "/selecte/visitador_sociedades_cientificas/nombre/id_sociedad_cientifica",
           checked: true,
@@ -187,17 +188,18 @@ export default {
         }
         bd.put(res)
         this.dataInfo.forEach(element => {
-          this.$q.notify({
-          message: 'Data guardada correctamente',
-          position: 'top',
-          type: 'positive'
-          })
+
         })          
       })
       setTimeout(() => {
       value.loading = false;
       }, 3000)
       }
+      this.$q.notify({
+        message: 'Data guardada correctamente',
+        position: 'top',
+        type: 'positive'
+        })
       }
     },
 
