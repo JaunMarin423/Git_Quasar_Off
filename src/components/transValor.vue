@@ -10,7 +10,11 @@
     <br>
     <div class="col">
     <span class="letrasazules">Fecha de inicio:</span>
-    <q-datetime v-model="form.fecha_inicio" modal float-label="Fecha" />
+    <q-datetime
+    v-model="form.fecha_inicio"
+    :max="yesterday"
+    float-label="Fecha" 
+    />
     </div>
     <div class="col">
     <q-card-title class="bg-primary text-center fondoAzcul">
@@ -83,7 +87,7 @@
      <br/>
     <FirmaComponent @firma="form.firma = $event"/>
     <br/>
-    <q-btn align="between" class="btn-fixed-width centrar" color="green" label="Guardar Formulario" icon="send" @click="creacionFormularioOFF()" />
+    <q-btn align="between" class="btn-fixed-width centrar" color="green" label="Guardar Formulario" icon="send" @click="onoff()" />
   </div>
 </template>
 
@@ -96,20 +100,22 @@ import valorEComponent from '../components/valorE'
 import {peticiones} from '../js/peticiones'
 import { bd } from "../js/bd"
 import { bdt } from "../js/BDTransValor"
-
+import { mapState } from 'vuex'
 
 const today = new Date()
 
 export default {
  name: 'transValorComponent',
  mixins:[peticiones],
-    components: {
-    selectComponent,
-    FirmaComponent,
-    tipoPersonaComponent,
-    valorEComponent,
-    
-  },
+components: {
+  selectComponent,
+  FirmaComponent,
+  tipoPersonaComponent,
+  valorEComponent,
+},
+computed: {
+  ...mapState('app', ['isOnline'])
+},
   data () {
     return {
       receptorD: [],
@@ -188,7 +194,7 @@ export default {
       },
       { name: 'Sociedad Cientifica',
         required: true,
-        label: 'Sociedad Cientifica',
+        label: 'Sociedad Científica',
         align: 'left',
         field: 'Sociedad',
         sortable: true,
@@ -197,7 +203,7 @@ export default {
       },
       { name: 'Fima habeas data',
         required: true,
-        label: 'Fima habeas data',
+        label: 'Firma habeas data',
         align: 'left',
         field: 'Habeas',
         sortable: true,
@@ -266,6 +272,17 @@ export default {
     this.configuracion()
   },
   methods:{
+    onoff(){
+      if(this.isOnline == true){
+        this.creacionFormulario ()
+        console.log('ONLINE');
+        
+      }else{
+        this.creacionFormularioOFF ()
+        console.log('OFF_ONLINE');
+      }
+    },
+
     configuracion(){
       if (this.userName === undefined) {
           this.$q.notify({
@@ -279,9 +296,15 @@ export default {
       }
     },
     datosReceptor(){
-      bd.get('receptorD')
+      
+      // bd.get('receptorD')
+      bd.get('receptores')
       .then(doc => {
-        this.tableData = doc.data.map(e => e)
+        this.tableData = doc.data.filter(e => {
+          if (this.form.id_cliente == e.id_cliente){
+            return e
+          }
+        })
       })
     },
     promocion(){
@@ -354,6 +377,8 @@ export default {
       }
       this.form.login= sessionStorage.idsec_users,
       this.form.id_periodo= sessionStorage.id_periodo,
+      console.log('hola aquí');
+      delete this.form._id
       this.axiosModelo('/transferenciaValor','POST',this.form)
       .then((Data) => {
             Loading.hide()
@@ -423,6 +448,7 @@ export default {
           }
           this.form.login= sessionStorage.idsec_users,
           this.form.id_periodo= sessionStorage.id_periodo,
+          delete this.form._id
           this.axiosModelo('/transferenciaValor','POST',this.form)
           .then((Data) => {
                 Loading.hide()
@@ -594,7 +620,7 @@ export default {
             message: "Envíos exitosos.",
             icon: "done",
             timeout: 3000,
-            // closeBtn: location.reload()
+            closeBtn: location.reload()
           })
           // this.axiosModelo('/transferenciaValor','POST',this.form)
           // .then((Data) => {

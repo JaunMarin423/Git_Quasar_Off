@@ -104,6 +104,12 @@ export default {
               sessionStorage.zona_id= Data.data.data.data.zona_id
               sessionStorage.id_periodo= Data.data.data.data.id_periodo
               sessionStorage.idsec_users = Data.data.data.data.idsec_users 
+              this.$q.notify({
+                color: "green",
+                textColor :"white",
+                message: "Sesión configurada",
+                icon: "done",
+              })
               
               // this.$router.push("home") 
               // console.log(this.$router); 

@@ -16,6 +16,13 @@
           </q-btn>
         </q-item-side>
       </q-item>
+
+      <!-- <q-btn
+        round
+        color="black"
+        @click="botonDescargaTodo()"
+        icon="cloud_download"
+      > -->
     </div>
     <!-- <q-btn push color="primary" icon="cloud_download" label="Descargar información" @click="changeMessage"/> -->
   </div>
@@ -30,28 +37,29 @@ export default {
   mixins:[peticiones],
   data() {
     return {
+     
       // Arrays quemados OJO!
       arrayTablas: [
         {
-          nombreTabla: "Datos del medico",
+          nombreTabla: "Receptores",
           url:
-            "/selectMedico/admin/num_identificacion",
+            "/selectMedico/"+ sessionStorage.idsec_users +"/num_identificacion",
           checked: true,
           loading: false,
           id: "receptores"
         },
-        {
-          nombreTabla: "Detalle del medico",
-          url:
-            "/receptorDetail/100790",
-          checked: true,
-          loading: false,
-          id: "receptorD"
-        },
+        // {
+        //   nombreTabla: "Detalle del medico",
+        //   url:
+        //     "/receptorDetail/100790",
+        //   checked: true,
+        //   loading: false,
+        //   id: "receptorD"
+        // },
         {
           nombreTabla: "Promoción",
           url:
-            "/promocion/admin/3",
+            "/promocion/"+ sessionStorage.idsec_users+"/3",
           checked: true,
           loading: false,
           id: "promocion"
@@ -137,6 +145,10 @@ export default {
   },
   methods: {
 
+    botonDescargaTodo () {
+      console.log('pruebas');
+      
+    },
     
     getData(value) {
       //     console.log(doc);

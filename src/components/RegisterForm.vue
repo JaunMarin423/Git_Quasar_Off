@@ -110,6 +110,7 @@
   import { Loading } from 'quasar'
   import { bd } from "../js/bd"
   import { dbr } from "../js/BDReceptor"
+  import { mapState } from 'vuex'
 
   import habesD from './habesD'
   export default {
@@ -123,6 +124,9 @@
       selectDepartamentoComponent,
       selectSociedadCComponent
   },
+  computed: {
+  ...mapState('app', ['isOnline'])
+  },
     data () {
       return {
         userName: sessionStorage.idsec_users,
@@ -132,23 +136,23 @@
           password: ''
         },
         form:{
-        tipo_identificacion:'',
-        num_identificacion:'',
-        nombre:'',
-        direccion:'',
-        direccion_detalle:'',
-        telefono:'',
-        estado:'1',
-        usuario_creador: sessionStorage.idsec_users,
-        id_centros_poblados:'',
-        id_div_dpto:'',
-        id_tipo_cliente:'',
-        id_tipo_receptor:'',
-        id_sociedad_cientifica:'',
-        fecha_nacimiento:'',
-        isHabeas: false,
-        firma: [],
-        _id: 'receptor_'+Date.now(),
+          tipo_identificacion:'',
+          num_identificacion:'',
+          nombre:'',
+          direccion:'',
+          direccion_detalle:'',
+          telefono:'',
+          estado:'1',
+          usuario_creador: sessionStorage.idsec_users,
+          id_centros_poblados:'',
+          id_div_dpto:'',
+          id_tipo_cliente:'',
+          id_tipo_receptor:'',
+          id_sociedad_cientifica:'',
+          fecha_nacimiento:'',
+          isHabeas: false,
+          firma: [],
+          _id: 'receptor_'+Date.now(),
       },
       }
     },
@@ -177,6 +181,16 @@
       }
     },
     methods: {
+    onoff(){
+      if(this.isOnline == true){
+        this.creacionReceptor ()
+        console.log('ONLINE');
+        
+      }else{
+        this.creacionReceptorOFF ()
+        console.log('OFF_ONLINE');
+      }
+    },
     configuracion(){
       if (this.userName === undefined) {
           this.$q.notify({
@@ -315,6 +329,7 @@
             this.form.usuario_creador= sessionStorage.idsec_users,
             this.form.id_tipo_receptor=1,
             this.form.isHabeas=true,
+            delete this.from._id
           this.axiosModelo('/receptorDetail','POST',this.form)
           .then((Data) => {
                 this.$q.loading.hide()

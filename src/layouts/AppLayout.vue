@@ -97,7 +97,6 @@
           to="/register"
           name="register"
           slot="title"
-          v-if="isOnline"
         />
         <q-route-tab
           icon="sync"
