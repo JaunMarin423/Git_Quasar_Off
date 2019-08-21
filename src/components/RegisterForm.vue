@@ -72,8 +72,6 @@
     
     <selectDepartamentoComponent @sD="form.id_div_dpto = $event"/>
     <selectCiudadComponent @sC="form.id_centros_poblados = $event"/>
-    <p>puta madre</p>
-    <p>{{form.id_centros_poblados}}</p>
     <selectSociedadCComponent @sSC="form.id_sociedad_cientifica = $event"/>
     <q-field
       icon="email"
@@ -95,7 +93,7 @@
       color="primary"
       icon-right="send"
       label="Enviar"
-      @click.native="submit"
+      @click.native="creacionReceptor()"
     />
 
   </div>
@@ -109,6 +107,7 @@
   import selectDepartamentoComponent from './selectDepartamento'
   import selectSociedadCComponent from './selectSociedadC'
   import { peticiones } from "../js/peticiones.js"
+  import { Loading } from 'quasar'
   
   import habesD from './habesD'
   export default {
@@ -149,6 +148,21 @@
       },
       }
     },
+    computed:{
+    filterCiudad () {
+      return this.dataSelCity.filter(filtro => {
+        return filtro.COD_DPTO === this.form.id_div_dpto
+      })
+    },
+    ubicar(){
+      this.dataEdit = Object.assign( this.dataEdit,this.punto) 
+      this.$emit('update:dataEdit', this.dataEdit)
+    }
+  },
+  mounted () {
+    this.consultSelDepartamento(),
+    this.consultSelCity ()
+  },
     validations: {
       register: {
         displayName: { required, minLength: minLength(2) },
@@ -194,6 +208,125 @@
         })
         this.ActivoBoton = true
         this.Activoform = false
+    },
+    creacionReceptor () {
+      if (this.form.tipo_identificacion == '')
+       {
+            this.$q.notify({
+            message: 'Probablemente falte asignar tipo de documento',
+            position: 'top',
+            type: 'red',
+            icon: 'warning'
+            })
+      }else{ 
+        if(this.form.num_identificacion == ''){
+            this.$q.notify({
+            message: 'Probablemente falte asignar numero de identificación',
+            position: 'top',
+            type: 'red',
+            icon: 'warning'
+            })
+        }else{
+          if( this.form.nombre == ''){
+            this.$q.notify({
+            message: 'Complete el nombre',
+            position: 'top',
+            type: 'red',
+            icon: 'warning'
+            })
+          }else{
+            if (this.form.id_centros_poblados == '') {
+              this.$q.notify({
+              message: 'Seleccione ciudad',
+              position: 'top',
+              type: 'red',
+              icon: 'warning'
+              })
+            }else{
+              if(this.form.fecha_nacimiento == ''){
+            this.$q.notify({
+            message: 'Seleccione su fecha de nacimiento',
+            position: 'top',
+            type: 'red',
+            icon: 'warning'
+            })
+              }else{
+                if(this. form.id_sociedad_cientifica == ''){
+                  this.$q.notify({
+                  message: 'Seleccione sociedad cientifica',
+                  position: 'top',
+                  type: 'red',
+                  icon: 'warning'
+                  })
+                }else{
+                  if(this.form.telefono == ''){
+                    this.$q.notify({
+                    message: 'Complete el campo telefono',
+                    position: 'top',
+                    type: 'red',
+                    icon: 'warning'
+                    })
+                  }else{
+                  if(this.form.direccion == ''){
+                    this.$q.notify({
+                    message: 'Complete el campo dirección',
+                    position: 'top',
+                    type: 'red',
+                    icon: 'warning'
+                    })
+                  }else{
+                  if(this.form.correo_principal == ''){
+                    this.$q.notify({
+                    message: 'Complete el campo correo',
+                    position: 'top',
+                    type: 'red',
+                    icon: 'warning'
+                    })
+                  }else{
+                  if(this.form.firma == ''){
+                    this.$q.notify({
+                    message: 'Valide si guardo la firma',
+                    position: 'top',
+                    type: 'red',
+                    icon: 'warning'
+                    })
+                  }else{
+          this.$q.loading.show()
+            this.form.estado='1',
+            this.form.id_tipo_cliente=19,
+            this.form.usuario_creador= sessionStorage.idsec_users,
+            this.form.id_tipo_receptor=1,
+            this.form.isHabeas=true,
+          this.axiosModelo('/receptorDetail','POST',this.form)
+          .then((Data) => {
+                this.$q.loading.hide()
+                switch (Data.status){
+                  case 201: //OK
+                  this.$q.notify({
+                    color: "green",
+                    textColor :"black",
+                    message: "Envíos exitosos.",
+                    icon: "done",
+                    timeout: 3000,
+                    closeBtn: location.reload()
+                  })
+                  break;
+                  case 401: // Error Autenticación error token
+                    this.mensaje_notificacion('danger','Error Autenticación error token' + aux_accion)
+                  break;
+                }
+                // this.rspValidacion(Data.status)
+          })
+        }
+        }
+        } 
+        }
+        }
+        }
+        }
+        }
+        }
+      }  
     },
     }
   }

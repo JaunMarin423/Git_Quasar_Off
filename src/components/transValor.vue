@@ -333,7 +333,7 @@ export default {
                 icon: "warning"
               })
             }else if(this.validacion()){
-      this.$q.loading.hide()
+      this.$q.loading.show()
       if (this.form.firma == '') {
         delete this.form.firma
       }
@@ -403,7 +403,7 @@ export default {
                 icon: "warning"
               })
           }else if(this.validacion()){
-          this.$q.loading.hide()
+          this.$q.loading.show()
           if (this.form.firma == '') {
             delete this.form.firma
           }
