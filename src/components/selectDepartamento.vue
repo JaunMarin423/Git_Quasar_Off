@@ -2,7 +2,7 @@
   <div>
     <span class="letrasazules">Departamento</span>
     <q-select
-      v-model="select"
+      v-model="valor"
       :options="options"
       label="Tipo Documento"
     />
@@ -76,7 +76,7 @@ export default {
   },
   watch: {
     valor (newseleccion){
-          this.$emit('update:seleccion',newseleccion)
+          this.$emit('sD',newseleccion)
     },
     warning (val) {
       if (val) {

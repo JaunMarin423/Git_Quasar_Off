@@ -5,7 +5,7 @@
     CREACIÓN DE RECEPTOR
   </q-card-title>
   
-  <tipoDocumentoSComponent/>
+  <tipoDocumentoSComponent @tDS="form.tipo_identificacion = $event"/>
 
     <q-field
       icon="pcredit_card"
@@ -70,9 +70,11 @@
     />
     </q-field>
     
-    <selectDepartamentoComponent/>
-    <selectCiudadComponent/>
-    <selectSociedadCComponent/>
+    <selectDepartamentoComponent @sD="form.id_div_dpto = $event"/>
+    <selectCiudadComponent @sC="form.id_centros_poblados = $event"/>
+    <p>puta madre</p>
+    <p>{{form.id_centros_poblados}}</p>
+    <selectSociedadCComponent @sSC="form.id_sociedad_cientifica = $event"/>
     <q-field
       icon="email"
       helper="Correo "
@@ -86,7 +88,7 @@
 
     <habesD/>
     
-    <FirmaComponent/>
+    <FirmaComponent @firma="form.firma = $event"/>
 
     <q-btn
       class="q-mt-lg full-width"
