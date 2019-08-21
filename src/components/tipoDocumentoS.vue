@@ -62,7 +62,6 @@ export default {
       let opciones = []
       return bd.get('identificacion')
       .then(doc => {
-        console.log(doc.data);
         this.options = doc.data.map(e => {
           return {
             label: e.text,

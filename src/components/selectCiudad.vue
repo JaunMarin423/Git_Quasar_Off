@@ -64,8 +64,8 @@ export default {
       .then(doc => {
         this.options = doc.data.map(e => {
           return {
-            label: e.valor,
-            value: e.valor
+            label: e.Nombre,
+            value: e.COD_Municipio
           }
         })
         })

@@ -60,12 +60,12 @@ export default {
   methods:{
     consultar(){
       let opciones = []
-      return bd.get('Departamentos')
+      return bd.get('departamentos')
       .then(doc => {
         this.options = doc.data.map(e => {
           return {
-            label: e.valor,
-            value: e.valor
+            label: e.Departamento,
+            value: e.COD_DPTO
           }
         })
         })

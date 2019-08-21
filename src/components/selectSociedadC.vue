@@ -62,10 +62,11 @@ export default {
       let opciones = []
       return bd.get('v.sociedadcientifica')
       .then(doc => {
+        console.log(doc.data);
         this.options = doc.data.map(e => {
           return {
-            label: e.valor,
-            value: e.valor
+            label: e.text,
+            value: e.value
           }
         })
         })
