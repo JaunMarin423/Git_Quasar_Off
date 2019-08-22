@@ -1,10 +1,5 @@
 <template>
     <div>
-      <p class="caption">
-        <span>Tap</span>
-        on each type to see it in action.
-      </p>
-
       <q-list>
         <q-item
           link
@@ -13,8 +8,6 @@
           @click.native="dialog.handler()"
           v-ripple.mat
         >
-
-
           <q-item-side :icon="dialog.icon" />
           <q-item-main :label="dialog.label" />
           <q-item-side right icon="keyboard_arrow_right" />
@@ -57,7 +50,6 @@ export default {
               message: this.dataInfo,
               ok: 'Aceptar',
               cancel: 'Cancelar',
-              html: true,
             }).then(() => {
               this.$q.notify({
               message: 'Acepto!',
@@ -85,7 +77,7 @@ export default {
       this.dataInfo = this.dataInfo.replace("$DIRECCION$",this.d)
       this.dataInfo = this.dataInfo.replace("$CORREO$",this.c)
       this.dataInfo = this.dataInfo.replace("$TEL$",this.t)
-      //  document.write(this.dataInfo)
+       // document.write(this.dataInfo)
       })
   },
 }

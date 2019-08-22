@@ -2,6 +2,7 @@
   <div>
     <span class="letrasazules">Tipo de transferencia:</span>
     <q-select
+      filter
       v-model="valor"
       :options="options"
       label="... seleccionar ..."

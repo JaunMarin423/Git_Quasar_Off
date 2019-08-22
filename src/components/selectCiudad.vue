@@ -2,6 +2,7 @@
   <div>
     <span class="letrasazules">Ciudad</span>
     <q-select
+      filter
       v-model="valor"
       :options="options"
       label="Tipo Documento"

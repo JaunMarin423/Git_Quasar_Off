@@ -85,7 +85,7 @@
     </q-field>
 
     <habesD :d="this.form.direccion" :c="this.form.correo_principal" :t="this.form.telefono" />
-    
+    <br/>
     <FirmaComponent @firma="form.firma = $event"/>
 
     <q-btn
@@ -122,7 +122,7 @@
       habesD,
       selectCiudadComponent,
       selectDepartamentoComponent,
-      selectSociedadCComponent
+      selectSociedadCComponent,
   },
   computed: {
   ...mapState('app', ['isOnline'])

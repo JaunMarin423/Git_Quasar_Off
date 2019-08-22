@@ -2,6 +2,7 @@
   <div>
     <span class="letrasazules">Departamento</span>
     <q-select
+      filter
       v-model="valor"
       :options="options"
       label="Tipo Documento"

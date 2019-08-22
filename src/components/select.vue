@@ -1,6 +1,7 @@
 <template>
   <div>
     <q-select
+      filter
       v-model="valor"
       :options="options"
       label="Medico"
