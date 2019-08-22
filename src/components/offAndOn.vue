@@ -48,18 +48,10 @@ export default {
           loading: false,
           id: "receptores"
         },
-        // {
-        //   nombreTabla: "Detalle del medico",
-        //   url:
-        //     "/receptorDetail/100790",
-        //   checked: true,
-        //   loading: false,
-        //   id: "receptorD"
-        // },
         {
           nombreTabla: "Promoción",
           url:
-            "/promocion/"+ sessionStorage.idsec_users+"/3",
+            "/promocion/"+ sessionStorage.idsec_users+"/"+ sessionStorage.id_periodo +"",
           checked: true,
           loading: false,
           id: "promocion"
