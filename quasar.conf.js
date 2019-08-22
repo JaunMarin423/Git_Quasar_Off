@@ -87,6 +87,8 @@ module.exports = function (ctx) {
         'QTableColumns',
         'QSlideTransition',
         'QRadio',
+        'QScrollArea',
+        'Scroll'
         
       ],
       directives: [
