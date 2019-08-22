@@ -84,7 +84,7 @@
     />
     </q-field>
 
-    <habesD/>
+    <habesD :d="this.form.direccion" :c="this.form.correo_principal" :t="this.form.telefono" />
     
     <FirmaComponent @firma="form.firma = $event"/>
 
@@ -169,8 +169,6 @@
   },
   mounted () {
     this.configuracion()
-    this.consultSelDepartamento()
-    this.consultSelCity ()
     
   },
     validations: {

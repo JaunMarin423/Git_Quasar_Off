@@ -179,22 +179,39 @@ export default {
          if(value.loading==false){
       // we set loading state
       value.loading = true;
-      console.log(value.url);
+      if(value.url ==='/habeasDatas'){
+
+      this.axiosModeloGET(value.url)
+      .then((Data) => {
+        this.rspValidacion(Data.status)
+        this.dataInfo = Data.data.data.data.observacion
+        let res = {
+          _id: "habeasDatas",
+          data: {observacion: this.dataInfo}
+        }
+        bd.put(res)
+      })
+
+      }else{
 
       this.axiosModeloGET(value.url)
       .then((Data) => {
         this.rspValidacion(Data.status)
         this.dataInfo = Array.isArray(Data.data.data.data) ? Data.data.data.data: []
+
         this.dataInfo._id = value.id
         let res = {
           _id: value.id,
           data: this.dataInfo
         }
         bd.put(res)
+        
         this.dataInfo.forEach(element => {
 
         })          
       })
+      }
+
       setTimeout(() => {
       value.loading = false;
       }, 3000)

@@ -87,7 +87,7 @@ module.exports = function (ctx) {
         'QTableColumns',
         'QSlideTransition',
         'QRadio',
-        'Dialog'
+        
       ],
       directives: [
         'Ripple',
@@ -95,7 +95,7 @@ module.exports = function (ctx) {
       ],
       // Quasar plugins
       plugins: [
-        'Notify', 'Loading'
+        'Notify', 'Loading', 'Dialog'
       ]
       // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
       // i18n: 'de' // Quasar language
