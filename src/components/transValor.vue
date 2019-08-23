@@ -12,7 +12,7 @@
     <span class="letrasazules">Fecha de inicio:</span>
     <q-datetime
     v-model="form.fecha_inicio"
-    :max="yesterday"
+    :max="today"
     float-label="Fecha" 
     />
     </div>
@@ -133,6 +133,7 @@ computed: {
         id_cliente: '',
         id_periodo: '',
         fecha_inicio: today,
+        fecha_registro: today,
         login:'',
         recibe_directo:1,
         id_tipo_tercero:'',
@@ -146,7 +147,6 @@ computed: {
       activarCamara:true,
       SedeOK:true,
       valor:'',
-      today,
       tomorrow: addToDate(today, { days: 1 }),
       yesterday: subtractFromDate(today, { days: 1 }),
       state: new Date(),
@@ -549,39 +549,6 @@ computed: {
                     timeout: 3000,
                     closeBtn: location.reload()
                   })
-      // this.axiosModelo('/transferenciaValor','POST',this.form)
-      // .then((Data) => {
-      //       Loading.hide()
-      //       switch (Data.status){
-      //         case 203: // Error Autenticación error token
-      //           this.$q.notify({
-      //             color: "red",
-      //             textColor :"black",
-      //             message: "Error foto",
-      //             icon: "clear"
-      //           })
-      //         break;
-      //         case 201: //OK
-      //           Loading.hide()
-      //           this.form.id_cliente=''
-      //           this.form.fecha_inicio=''
-      //           this.form.recibe_directo=''
-      //           this.form.direccion=''
-      //             this.$q.notify({
-      //               color: "green",
-      //               textColor :"black",
-      //               message: "Envíos exitosos.",
-      //               icon: "done",
-      //               timeout: 3000,
-      //               closeBtn: location.reload()
-      //             })
-      //         break;
-      //         case 401: // Error Autenticación error token
-      //           this.mensaje_notificacion('danger','Error Autenticación error token' + aux_accion)
-      //         break;
-      //       }
-      //       this.rspValidacion(Data.status)
-      //     })
           }
           }
           }
@@ -629,39 +596,6 @@ computed: {
             timeout: 3000,
             closeBtn: location.reload()
           })
-          // this.axiosModelo('/transferenciaValor','POST',this.form)
-          // .then((Data) => {
-          //       Loading.hide()
-          //       switch (Data.status){
-          //         case 203: // Error Autenticación error token
-          //           this.$q.notify({
-          //             color: "red",
-          //             textColor :"black",
-          //             message: "Valide que todos los campos tengan algun valor",
-          //             icon: "clear",
-          //           }) 
-          //         break;
-          //         case 201: //OK
-          //           Loading.hide()
-          //           this.form.id_cliente=''
-          //           this.form.fecha_inicio=''
-          //           this.form.recibe_directo=''
-          //           this.form.direccion=''
-          //            this.$q.notify({
-          //           color: "green",
-          //           textColor :"black",
-          //           message: "Envíos exitosos.",
-          //           icon: "done",
-          //           timeout: 3000,
-          //           closeBtn: location.reload()
-          //         })
-          //         break;
-          //         case 401: // Error Autenticación error token
-          //           this.mensaje_notificacion('danger','Error Autenticación error token' + aux_accion)
-          //         break;
-          //       }
-          //   this.rspValidacion(Data.status)
-          // })
       }
       }
       }

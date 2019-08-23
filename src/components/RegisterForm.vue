@@ -4,7 +4,7 @@
   <q-card-title class="bg-primary text-center fondoAzcul">
     CREACIÓN DE RECEPTOR
   </q-card-title>
-  
+
   <tipoDocumentoSComponent @tDS="form.tipo_identificacion = $event"/>
 
     <q-field
@@ -110,9 +110,14 @@
   import { Loading } from 'quasar'
   import { bd } from "../js/bd"
   import { dbr } from "../js/BDReceptor"
+  import { bdt } from "../js/BDTransValor";
   import { mapState } from 'vuex'
-
+  import { date } from 'quasar'
   import habesD from './habesD'
+
+  const today = new Date()
+  const { startOfDate, addToDate, subtractFromDate } = date
+
   export default {
     name: 'RegisterFormComponent',
     mixins:[peticiones],
@@ -153,6 +158,7 @@
           isHabeas: false,
           firma: [],
           _id: 'receptor_'+Date.now(),
+          fecha_registro: today,
       },
       }
     },
@@ -447,8 +453,7 @@
             this.form.usuario_creador= sessionStorage.idsec_users,
             this.form.id_tipo_receptor=1,
             this.form.isHabeas=true,
-            dbr.put(this.form)
-            console.log('aqui');
+            bdt.put(this.form)
             this.$q.notify({
               color: "green",
               textColor :"black",

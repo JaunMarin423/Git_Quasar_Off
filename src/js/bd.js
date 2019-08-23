@@ -24,4 +24,6 @@ export const bd = {
   get (data) {
     return db.get(data)
   },
+
+
 }

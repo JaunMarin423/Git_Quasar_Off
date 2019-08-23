@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <register-form @onRegister="registerApi" />
+    <register-form/>
   </q-page>
 </template>
 

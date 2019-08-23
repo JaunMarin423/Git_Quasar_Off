@@ -22,5 +22,20 @@ export const bdt = {
   get (data) {
     return bdT.get(data)
   },
+  allDocs(data) {
+    return bdT.allDocs({
+    include_docs: true,
+    attachments: true
+  }, function(err, response) {
+    if (err) { return console.log(err); }
+    // handle result
+  });
+  },
+  remove(data) {
+     return bdT.remove(data)
+  },
+  delete(){
+
+  }
 }
 
