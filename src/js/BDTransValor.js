@@ -32,10 +32,18 @@ export const bdt = {
   });
   },
   remove(data) {
-     return bdT.remove(data)
+    //  return bdT.remove(data)
+     bdT.get(data, function(err, doc) {
+       console.log('data', doc);
+       
+      if (err) { return console.log(err); }
+      bdT.remove(doc,function(err, response) {
+        console.log('respuesta de borrar', response);
+        
+        if (err) { return console.log(err); }
+      });
+    });
   },
-  delete(){
 
-  }
 }
 

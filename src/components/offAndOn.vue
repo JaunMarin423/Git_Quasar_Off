@@ -34,6 +34,7 @@
 
     <br />
     <q-btn push color="primary" @click="subirDatos()" icon="backup" label="Subir información" />
+
   </div>
 </template>
 
@@ -182,6 +183,7 @@ export default {
       });
     },
 
+
     subirDatos() {
  
       console.log(this.receptor);
@@ -200,7 +202,9 @@ export default {
             break;
         }
         let id = row['id']
-        console.log(id);
+        // console.log(id);
+        // console.log(this.receptor);
+        
         
         delete row['doc']['_id'];
         delete row['doc']['_rev'];
@@ -217,7 +221,8 @@ export default {
                 icon: "done",
                 timeout: 3000,
               })
-             return bdt.remove(id)
+              console.log('holas', row['id']);
+              bdt.remove(row['id'])
               break;
               case 401: // Error Autenticación error token
                 this.mensaje_notificacion('danger','Error Autenticación error token' + aux_accion)
