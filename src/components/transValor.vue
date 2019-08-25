@@ -74,7 +74,9 @@
         </q-td>
         <q-td key="cantidad_entregada" :props="props">
            <div class="row items-center justify-between no-wrap">
+             <div v-if="props.row.cantidad_entregada >= 1">
              <q-btn size="sm" round dense color="primary" icon="remove" @click="props.row.cantidad_entregada--" class="q-mr-xs" />
+             </div>
             <q-btn size="sm" round dense color="green" icon="add"  @click="props.row.cantidad_entregada++" class="q-mr-sm" /> 
             <div>{{ props.row.cantidad_entregada }}</div>
           </div>
@@ -326,6 +328,8 @@ computed: {
       var array2 = this.form.transfer;
       // console.log(this.form.id_cliente) valida el id del medico para su validación
       let entregados = array1.filter(element => element.cantidad_entregada > 0);
+      console.log(entregados);
+      
       if(entregados.length <= 0 && array2.length == 0){
       this.$q.notify({
         color: "red",

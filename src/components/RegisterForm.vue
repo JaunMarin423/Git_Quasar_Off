@@ -109,7 +109,6 @@
   import { peticiones } from "../js/peticiones.js"
   import { Loading } from 'quasar'
   import { bd } from "../js/bd"
-  import { dbr } from "../js/BDReceptor"
   import { bdt } from "../js/BDTransValor";
   import { mapState } from 'vuex'
   import { date } from 'quasar'
