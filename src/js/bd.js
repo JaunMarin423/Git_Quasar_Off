@@ -24,6 +24,26 @@ export const bd = {
   get (data) {
     return db.get(data)
   },
-
-
+  allDocs(data) {
+    return db.allDocs({
+    include_docs: true,
+    attachments: true
+  }, function(err, response) {
+    if (err) { return console.log(err); }
+    // handle result
+  });
+  },
+  remove(data) {
+    //  return db.remove(data)
+     db.get(data, function(err, doc) {
+       console.log('data', doc);
+       
+      if (err) { return console.log(err); }
+      db.remove(doc,function(err, response) {
+        console.log('respuesta de borrar', response);
+        
+        if (err) { return console.log(err); }
+      });
+    });
+  }
 }
