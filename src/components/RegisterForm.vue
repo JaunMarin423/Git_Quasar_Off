@@ -93,7 +93,15 @@
       color="primary"
       icon-right="send"
       label="Enviar"
-      @click.native="creacionReceptorOFF()"
+      @click.native="onoff()"
+    />
+
+    <q-btn
+      class="q-mt-lg full-width"
+      color="green"
+      icon-right="autorenew"
+      label="Actualizar"
+      @click.native="actualizar()"
     />
 
   </div>
@@ -222,9 +230,11 @@
       this.$q.loading.show
       this.axiosModeloGET('/solicitud/' + this.form.num_identificacion)
         .then(Data =>{ 
-          this.$q.loading.hide() 
+          this.$q.loading.hide()
           if(Array.isArray(Data.data.data.data)){
             this.dataInfo =  Data.data.data.data
+            this.form = this.dataInfo[0]
+            console.log('form', this.form)
             this.$q.notify({
             message: 'El número de documento sé encuentra registrado',
             position: 'top',
@@ -243,6 +253,128 @@
         })
         this.ActivoBoton = true
         this.Activoform = false
+    },
+
+    actualizar(){
+       if (this.form.tipo_identificacion == '')
+       {
+            this.$q.notify({
+            message: 'Probablemente falte asignar tipo de documento',
+            position: 'top',
+            type: 'red',
+            icon: 'warning'
+            })
+      }else{ 
+        if(this.form.num_identificacion == ''){
+            this.$q.notify({
+            message: 'Probablemente falte asignar numero de identificación',
+            position: 'top',
+            type: 'red',
+            icon: 'warning'
+            })
+        }else{
+          if( this.form.nombre == ''){
+            this.$q.notify({
+            message: 'Complete el nombre',
+            position: 'top',
+            type: 'red',
+            icon: 'warning'
+            })
+          }else{
+            if (this.form.id_centros_poblados == '') {
+              this.$q.notify({
+              message: 'Seleccione ciudad',
+              position: 'top',
+              type: 'red',
+              icon: 'warning'
+              })
+            }else{
+              if(this.form.fecha_nacimiento == ''){
+            this.$q.notify({
+            message: 'Seleccione su fecha de nacimiento',
+            position: 'top',
+            type: 'red',
+            icon: 'warning'
+            })
+              }else{
+                if(this. form.id_sociedad_cientifica == ''){
+                  this.$q.notify({
+                  message: 'Seleccione sociedad cientifica',
+                  position: 'top',
+                  type: 'red',
+                  icon: 'warning'
+                  })
+                }else{
+                  if(this.form.telefono == ''){
+                    this.$q.notify({
+                    message: 'Complete el campo telefono',
+                    position: 'top',
+                    type: 'red',
+                    icon: 'warning'
+                    })
+                  }else{
+                  if(this.form.direccion == ''){
+                    this.$q.notify({
+                    message: 'Complete el campo dirección',
+                    position: 'top',
+                    type: 'red',
+                    icon: 'warning'
+                    })
+                  }else{
+                  if(this.form.correo_principal == ''){
+                    this.$q.notify({
+                    message: 'Complete el campo correo',
+                    position: 'top',
+                    type: 'red',
+                    icon: 'warning'
+                    })
+                  }else{
+                  if(this.form.firma == ''){
+                    this.$q.notify({
+                    message: 'Valide si guardo la firma',
+                    position: 'top',
+                    type: 'red',
+                    icon: 'warning'
+                    })
+                  }else{
+                    console.log(this.form)
+          // this.$q.loading.show()
+            // this.form.estado='1',
+            // this.form.id_tipo_cliente=19,
+            // this.form.usuario_creador= sessionStorage.idsec_users,
+            // this.form.id_tipo_receptor=1,
+            // this.form.isHabeas=true,
+            // delete this.from._id
+          this.axiosModelo('/solicitud/'+ this.form.id_cliente ,'PUT',this.form)
+          .then((Data) => {
+                this.$q.loading.hide()
+                switch (Data.status){
+                  case 201: //OK
+                  this.$q.notify({
+                    color: "green",
+                    textColor :"black",
+                    message: "Envíos exitosos.",
+                    icon: "done",
+                    timeout: 3000,
+                    closeBtn: location.reload()
+                  })
+                  break;
+                  case 401: // Error Autenticación error token
+                    this.mensaje_notificacion('danger','Error Autenticación error token' + aux_accion)
+                  break;
+                }
+                // this.rspValidacion(Data.status)
+          })
+        }
+        }
+        } 
+        }
+        }
+        }
+        }
+        }
+        }
+      }  
     },
     creacionReceptor () {
       if (this.form.tipo_identificacion == '')
